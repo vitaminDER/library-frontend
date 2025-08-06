@@ -37,7 +37,8 @@ This is a [React](https://reactjs.org) + [TypeScript](https://www.typescriptlang
 4. Install dependencies.
 
    ```bash
-   npm install
+   npm i --legacy-peer-deps
+
    ```
 
 5. Start dev server with hot reload at http://localhost:3000.
