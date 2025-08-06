@@ -1,0 +1,13 @@
+#root {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    background: -webkit-linear-gradient(45deg, rgb(242, 229, 244) 8%, rgb(210, 246, 244), rgb(242, 229, 208));
+    background: -moz-linear-gradient(45deg, rgb(242, 229, 244) 8%, rgb(210, 246, 244), rgb(242, 229, 208));
+    background: linear-gradient(45deg, rgb(242, 229, 244) 8%, rgb(210, 246, 244), rgb(242, 229, 208));
+    color: #1a1a1a;
+
+}
+
