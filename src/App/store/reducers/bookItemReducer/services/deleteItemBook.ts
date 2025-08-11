@@ -14,7 +14,7 @@ export const deleteItemBook = createAsyncThunk<
   }
 >("deleteItemBook", async (id, thunkAPI) => {
   try {
-    await api.delete(`${QUERY.getBooksUrl}/${id}`, {headers: {
+    await api.delete(`${QUERY.deleteItemBookUrl}/${id}`, {headers: {
         Authorization: `Bearer ${getTokenFromCookie()}`,
         Accept: 'application/json'
       }});
