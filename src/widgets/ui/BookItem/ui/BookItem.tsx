@@ -83,7 +83,7 @@ export const BookItem = () => {
         </InfoBook>
       </InfoBookContainer>
       <ButtonBlock>
-        {isAuth && role.includes(UserRole.ADMIN) ? (
+        {isAuth && role === UserRole.ADMIN ? (
           <ButtonContainer>
             <Button variant="outlined" onClick={() => deleteHandler(bookId)}>
               Удалить

@@ -50,7 +50,7 @@ export const BrowserProvider = () => {
             path={PATH.ADMIN}
             element={
               <ProtectedRoute
-                isAuth={isAuth && role.includes(UserRole.ADMIN)}
+                isAuth={isAuth && role === UserRole.ADMIN}
                 redirectPath={PATH.AUTH}
               >
                 <Admin />

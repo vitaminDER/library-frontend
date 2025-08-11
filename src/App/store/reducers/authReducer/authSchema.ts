@@ -1,8 +1,8 @@
 import {FetchStatus, Nullable} from "@/App/store/storeTypes";
 
 export enum UserRole {
-    ADMIN = "admin",
-    USER = "user",
+    ADMIN = "ROLE_ADMIN",
+    USER = "ROLE_USER",
 }
 export type Role = "ROLE_USER" | "ROLE_ADMIN";
 

@@ -46,7 +46,7 @@ export const Nav = (): JSX.Element => {
             Вход
           </Button>
           {isAuth && <Link to={PATH.PROFILE}>Профиль</Link>}
-          {isAuth && role.includes(UserRole.ADMIN) && (
+          {isAuth && role === UserRole.ADMIN && (
             <Link to={PATH.ADMIN}>Admin</Link>
           )}
         </RightContainer>
