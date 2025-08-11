@@ -6,7 +6,7 @@ import { RequestError } from "@/App/store/storeTypes";
 import { api } from "@/utils/api/api";
 
 export interface RequestProfile {
-  userId: string;
+  userId: number;
 }
 
 export interface ResponseProfile {

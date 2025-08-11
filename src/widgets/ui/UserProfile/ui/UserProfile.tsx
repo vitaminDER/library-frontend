@@ -2,8 +2,6 @@ import { Divider, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 
 import { useAuth } from "@/App/store/hooks/useAuth";
-import { AuthData } from "@/App/store/reducers/authReducer/authSchema";
-import { setLogout } from "@/App/store/reducers/authReducer/authSlice";
 import { fetchProfile } from "@/App/store/reducers/profileReducer/services/fetchProfile";
 import { useAppDispatch } from "@/App/store/storeHooks";
 import { FemaleAvatar } from "@/assets/FemaleAvatar";
@@ -17,6 +15,7 @@ import {
   UserProfileRightContainer,
   UserProfileWrapper,
 } from "@/widgets/ui/UserProfile/ui/styles";
+import {authSliceAction} from "@/App/store/reducers/authReducer/authSlice";
 // import {getProfile} from "@/App/store/reducers/profileReducer/selectors.ts";
 
 const profile = {
@@ -62,18 +61,11 @@ export const UserProfile = () => {
     }
   };
   const handleLogout = () => {
-    const initAuth: AuthData = {
-      id: "",
-      login: "",
-      role: [],
-      isAuth: false,
-      isRegistered: false,
-    };
-    dispatch(setLogout(initAuth));
+    dispatch(authSliceAction.setLogout());
   };
 
   useEffect(() => {
-    if (isAuth) {
+    if (isAuth && id) {
       dispatch(fetchProfile({ userId: id }));
     }
   }, [dispatch, id, isAuth]);

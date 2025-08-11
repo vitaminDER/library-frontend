@@ -1,7 +1,6 @@
 import {
   createSlice,
   PayloadAction,
-  SliceCaseReducers,
 } from "@reduxjs/toolkit";
 
 import { ProfileSchema } from "@/App/store/reducers/profileReducer/profileSchema";
@@ -20,10 +19,7 @@ const initialState: ProfileSchema = {
   errorProfile: null,
 };
 
-export const profileSlice = createSlice<
-  ProfileSchema,
-  SliceCaseReducers<ProfileSchema>
->({
+export const profileSlice = createSlice({
   name: "profile",
   initialState,
   reducers: {},
