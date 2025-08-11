@@ -1,4 +1,4 @@
-import React, {JSX} from 'react';
+import React, {JSX, useEffect} from 'react';
 import {getTokenFromCookie} from "@/App/store/reducers/authReducer/utils";
 import {useAppDispatch, useAppSelector} from "@/App/store/storeHooks";
 import {fetchAuthMe} from "@/App/store/reducers/authReducer/services/fetchAuthMe";
@@ -15,9 +15,11 @@ const AuthProvider = (props: AuthProviderProps) => {
     const dispatch = useAppDispatch();
     const {loadingAuthMe} = useAppSelector(getAuth);
 
-    if (getTokenFromCookie()) {
-        dispatch(fetchAuthMe());
-    }
+    useEffect(() => {
+        if (getTokenFromCookie()) {
+            dispatch(fetchAuthMe());
+        }
+    }, []);
 
     return (
         <>
