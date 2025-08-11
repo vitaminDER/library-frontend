@@ -4,6 +4,7 @@ import type { AxiosError } from "axios";
 import { QUERY } from "@/App/store/backend/constants";
 import { RequestError } from "@/App/store/storeTypes";
 import { api } from "@/utils/api/api";
+import {AuthData} from "@/App/store/reducers/authReducer/authSchema";
 
 export interface RequestAuth {
   login: string;
@@ -17,14 +18,14 @@ interface ResponseAuth {
 }
 
 export const fetchAuth = createAsyncThunk<
-  ResponseAuth,
+    AuthData,
   RequestAuth,
   {
     rejectValue: RequestError;
   }
 >("fetchAuth", async (params, thunkAPI) => {
   try {
-    const response = await api.post<ResponseAuth>(QUERY.getItemBookUrl, params);
+    const response = await api.post<AuthData>(QUERY.getItemBookUrl, params);
     return response.data;
   } catch (e) {
     const error = e as AxiosError<RequestError>;

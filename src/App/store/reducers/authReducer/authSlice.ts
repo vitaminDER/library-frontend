@@ -47,7 +47,7 @@ export const authSlice = createSlice<AuthSchema, SliceCaseReducers<AuthSchema>>(
           state.loadingAuth = FetchStatus.PENDING;
         })
         .addCase(fetchAuth.fulfilled, (state, action) => {
-          state.authData.isAuth = action.payload.isAuth;
+          state.authData = action.payload;
           state.loadingAuth = FetchStatus.SUCCESS;
         })
         .addCase(fetchAuth.rejected, (state, action) => {
