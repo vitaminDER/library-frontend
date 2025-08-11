@@ -1,14 +1,8 @@
 import {
   createSlice,
-  PayloadAction,
-  SliceCaseReducers,
 } from "@reduxjs/toolkit";
 
-import {
-  AuthData,
-  AuthSchema, Role,
-  UserRole,
-} from "@/App/store/reducers/authReducer/authSchema";
+import {AuthSchema} from "@/App/store/reducers/authReducer/authSchema";
 import { fetchAuth } from "@/App/store/reducers/authReducer/services/fetchAuth";
 import { fetchRegistration } from "@/App/store/reducers/authReducer/services/fetchRegistration";
 import { FetchStatus } from "@/App/store/storeTypes";
@@ -37,13 +31,14 @@ const initialState: AuthSchema = {
   errorRegistered: null,
 };
 
-export const authSlice = createSlice<AuthSchema, SliceCaseReducers<AuthSchema>>(
+export const authSlice = createSlice(
   {
     name: "auth",
     initialState,
     reducers: {
-      setLogout(state: AuthSchema, action: PayloadAction<AuthData>) {
-        state.authData = action.payload;
+      setLogout(state) {
+        Cookies.remove('token');
+        state.authData = initialState.authData
       },
     },
     extraReducers: builder => {
@@ -84,13 +79,13 @@ export const authSlice = createSlice<AuthSchema, SliceCaseReducers<AuthSchema>>(
             setTokenInCookie(action.payload.token);
           state.authData = action.payload;
           }else {
-            Cookies.remove('auth_token');
+            Cookies.remove('token');
             state.authData = initialState.authData
           }
           state.loadingAuthMe = FetchStatus.SUCCESS;
         })
         .addCase(fetchAuthMe.rejected, (state, action) => {
-          Cookies.remove('auth_token');
+          Cookies.remove('token');
           state.errorAuthMe = action.payload?.message?.toUpperCase();
           state.loadingAuthMe = FetchStatus.REJECTED;
         });
@@ -98,5 +93,5 @@ export const authSlice = createSlice<AuthSchema, SliceCaseReducers<AuthSchema>>(
   }
 );
 
-export const { setLogout } = authSlice.actions;
+export const authSliceAction = authSlice.actions;
 export const authSliceReducer = authSlice.reducer;

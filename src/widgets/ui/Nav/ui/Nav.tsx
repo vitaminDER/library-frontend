@@ -13,9 +13,12 @@ import {
   NavWrapper,
   RightContainer,
 } from "./styles";
+import {useAppDispatch} from "@/App/store/storeHooks";
+import {authSliceAction} from "@/App/store/reducers/authReducer/authSlice";
 
 export const Nav = (): JSX.Element => {
   const { isAuth, role } = useAuth();
+  const dispatch = useAppDispatch();
 
   const navigate = useNavigate();
 
@@ -40,10 +43,14 @@ export const Nav = (): JSX.Element => {
             variant="outlined"
             size="small"
             onClick={() => {
+              if(isAuth){
+                dispatch(authSliceAction.setLogout())
+              }else {
               navigate(PATH.AUTH);
+              }
             }}
           >
-            Вход
+            {isAuth ? 'Выйти' :'Вход'}
           </Button>
           {isAuth && <Link to={PATH.PROFILE}>Профиль</Link>}
           {isAuth && role === UserRole.ADMIN && (

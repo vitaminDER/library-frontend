@@ -16,7 +16,8 @@ const AuthProvider = (props: AuthProviderProps) => {
     const {loadingAuthMe} = useAppSelector(getAuth);
 
     useEffect(() => {
-        if (getTokenFromCookie()) {
+        const token = getTokenFromCookie();
+        if (token) {
             dispatch(fetchAuthMe());
         }
     }, []);
