@@ -90,6 +90,7 @@ export const authSlice = createSlice<AuthSchema, SliceCaseReducers<AuthSchema>>(
           state.loadingAuthMe = FetchStatus.SUCCESS;
         })
         .addCase(fetchAuthMe.rejected, (state, action) => {
+          Cookies.remove('auth_token');
           state.errorAuthMe = action.payload?.message?.toUpperCase();
           state.loadingAuthMe = FetchStatus.REJECTED;
         });
