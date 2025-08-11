@@ -13,9 +13,11 @@ import { useAppDispatch, useAppSelector } from "@/App/store/storeHooks";
 import { PATH } from "@/constants";
 import { AuthWrapper, FormContainer } from "@/pages/Auth/ui/styled";
 import { FormStates } from "@/pages/Registration/ui/interface";
+import {useAuth} from "@/App/store/hooks/useAuth";
 
 export const Auth = () => {
-  const { isAuth } = useAppSelector(getAuth);
+  // const { isAuth } = useAppSelector(getAuth);
+  const { isAuth } = useAuth();
   const dispatch = useAppDispatch();
 
   const [login, setLogin] = useState<FormStates>({ value: "", error: "" });
