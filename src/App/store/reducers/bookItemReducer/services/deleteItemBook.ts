@@ -4,6 +4,7 @@ import type { AxiosError } from "axios";
 import { QUERY } from "@/App/store/backend/constants";
 import { RequestError } from "@/App/store/storeTypes";
 import { api } from "@/utils/api/api";
+import {getTokenFromCookie} from "@/App/store/reducers/authReducer/utils";
 
 export const deleteItemBook = createAsyncThunk<
   void,
@@ -13,8 +14,10 @@ export const deleteItemBook = createAsyncThunk<
   }
 >("deleteItemBook", async (id, thunkAPI) => {
   try {
-    await api.delete(`${QUERY.getBooksUrl}/${id}`);
-    // Для delete запроса обычно не возвращаем данные, так как ожидаем void
+    await api.delete(`${QUERY.getBooksUrl}/${id}`, {headers: {
+        Authorization: `Bearer ${getTokenFromCookie()}`,
+        Accept: 'application/json'
+      }});
     return;
   } catch (e) {
     const error = e as AxiosError<RequestError>;

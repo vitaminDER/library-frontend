@@ -12,6 +12,7 @@ import {
 import { fetchAuth } from "@/App/store/reducers/authReducer/services/fetchAuth";
 import { fetchRegistration } from "@/App/store/reducers/authReducer/services/fetchRegistration";
 import { FetchStatus } from "@/App/store/storeTypes";
+import {setTokenInCookie} from "@/App/store/reducers/authReducer/utils";
 
 const initialState: AuthSchema = {
   authData: {
@@ -48,6 +49,7 @@ export const authSlice = createSlice<AuthSchema, SliceCaseReducers<AuthSchema>>(
         })
         .addCase(fetchAuth.fulfilled, (state, action) => {
           state.authData = action.payload;
+          setTokenInCookie(action.payload.token);
           state.loadingAuth = FetchStatus.SUCCESS;
         })
         .addCase(fetchAuth.rejected, (state, action) => {

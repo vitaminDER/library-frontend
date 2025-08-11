@@ -2,12 +2,12 @@ import { getAuth } from "@/App/store/reducers/authReducer/authSelectors";
 import { useAppSelector } from "@/App/store/storeHooks";
 
 export const useAuth = () => {
-  const { id, login, isAuth, isRegistered, role } = useAppSelector(getAuth);
+  const {  isRegistered, authData } = useAppSelector(getAuth);
   return {
-    id,
-    login,
-    isAuth,
+    id: authData.id,
+    login: authData.login,
+    isAuth: authData.isAuth,
     isRegistered,
-    role,
+    role: authData.role,
   };
 };
