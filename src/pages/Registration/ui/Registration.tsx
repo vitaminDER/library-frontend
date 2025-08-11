@@ -151,7 +151,7 @@ export const Registration = () => {
           value={login.value}
           helperText={login.error}
           error={!!login.error}
-          id="outlined-multiline-flexible"
+          id="login"
           label="Login"
           sx={{ width: "500px" }}
           onChange={(e: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) =>
@@ -163,7 +163,7 @@ export const Registration = () => {
           helperText={email.error}
           error={!!email.error}
           type="email"
-          id="outlined-multiline-flexible"
+          id="email"
           label="Email"
           sx={{ width: "500px" }}
           onChange={(e: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) =>
@@ -176,7 +176,7 @@ export const Registration = () => {
           value={pass.value}
           helperText={pass.error}
           error={!!pass.error}
-          id="outlined-multiline-flexible"
+          id="pass"
           label="Password"
           sx={{ width: "500px" }}
           slotProps={{
@@ -209,7 +209,7 @@ export const Registration = () => {
           value={passConfirm.value}
           helperText={passConfirm.error}
           error={!!passConfirm.error}
-          id="outlined-multiline-flexible"
+          id="passConfirm"
           label="Confirm password"
           sx={{ width: "500px" }}
           slotProps={{

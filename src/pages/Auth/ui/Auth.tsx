@@ -4,19 +4,17 @@ import { Button, IconButton, InputAdornment, TextField } from "@mui/material";
 import { ChangeEvent, ReactNode, useCallback, useState } from "react";
 import { Link, Navigate } from "react-router-dom";
 
-import { getAuth } from "@/App/store/reducers/authReducer/authSelectors";
 import {
   fetchAuth,
   RequestAuth,
 } from "@/App/store/reducers/authReducer/services/fetchAuth";
-import { useAppDispatch, useAppSelector } from "@/App/store/storeHooks";
+import { useAppDispatch } from "@/App/store/storeHooks";
 import { PATH } from "@/constants";
 import { AuthWrapper, FormContainer } from "@/pages/Auth/ui/styled";
 import { FormStates } from "@/pages/Registration/ui/interface";
 import {useAuth} from "@/App/store/hooks/useAuth";
 
 export const Auth = () => {
-  // const { isAuth } = useAppSelector(getAuth);
   const { isAuth } = useAuth();
   const dispatch = useAppDispatch();
 
@@ -104,7 +102,7 @@ export const Auth = () => {
           value={login.value}
           helperText={login.error}
           error={!!login.error}
-          id="outlined-multiline-flexible"
+          id="login"
           label="Login"
           sx={{ width: "500px" }}
           onChange={(e: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) =>
@@ -116,7 +114,7 @@ export const Auth = () => {
           value={pass.value}
           helperText={pass.error}
           error={!!pass.error}
-          id="outlined-multiline-flexible"
+          id="pass"
           label="Password"
           sx={{ width: "500px" }}
           slotProps={{
