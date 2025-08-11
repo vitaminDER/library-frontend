@@ -23,6 +23,7 @@ import {
   InfoBookWrapper,
   LinkBox,
 } from "./styles";
+import {fetchBooks} from "@/App/store/reducers/booksReducer/services";
 
 export const BookItem = () => {
   const { isAuth, role } = useAuth();
@@ -85,7 +86,10 @@ export const BookItem = () => {
       <ButtonBlock>
         {isAuth && role === UserRole.ADMIN ? (
           <ButtonContainer>
-            <Button variant="outlined" onClick={() => deleteHandler(bookId)}>
+            <Button variant="outlined" onClick={() => {
+              deleteHandler(bookId);
+              dispatch(fetchBooks());
+            }}>
               Удалить
             </Button>
           </ButtonContainer>
