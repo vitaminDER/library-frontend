@@ -30,7 +30,9 @@ export interface AuthSchema {
     authData: AuthData;
     isRegistered:boolean;
     loadingAuth: FetchStatus;
+    loadingAuthMe: FetchStatus;
     loadingRegistered: FetchStatus;
     errorAuth: Nullable<string> | undefined;
     errorRegistered: Nullable<string> | undefined;
+    errorAuthMe: Nullable<string> | undefined;
 }

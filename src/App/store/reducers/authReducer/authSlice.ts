@@ -13,6 +13,8 @@ import { fetchAuth } from "@/App/store/reducers/authReducer/services/fetchAuth";
 import { fetchRegistration } from "@/App/store/reducers/authReducer/services/fetchRegistration";
 import { FetchStatus } from "@/App/store/storeTypes";
 import {setTokenInCookie} from "@/App/store/reducers/authReducer/utils";
+import {fetchAuthMe} from "@/App/store/reducers/authReducer/services/fetchAuthMe";
+import Cookies from "js-cookie";
 
 const initialState: AuthSchema = {
   authData: {
@@ -28,7 +30,9 @@ const initialState: AuthSchema = {
   },
   isRegistered:false,
   loadingAuth: FetchStatus.IDLE,
+  loadingAuthMe: FetchStatus.IDLE,
   errorAuth: null,
+  errorAuthMe: null,
   loadingRegistered: FetchStatus.IDLE,
   errorRegistered: null,
 };
@@ -45,6 +49,7 @@ export const authSlice = createSlice<AuthSchema, SliceCaseReducers<AuthSchema>>(
     extraReducers: builder => {
       builder
         .addCase(fetchAuth.pending, state => {
+          state.errorAuth = null;
           state.loadingAuth = FetchStatus.PENDING;
         })
         .addCase(fetchAuth.fulfilled, (state, action) => {
@@ -58,6 +63,7 @@ export const authSlice = createSlice<AuthSchema, SliceCaseReducers<AuthSchema>>(
         });
       builder
         .addCase(fetchRegistration.pending, state => {
+          state.errorRegistered = null;
           state.loadingRegistered = FetchStatus.PENDING;
         })
         .addCase(fetchRegistration.fulfilled, (state, action) => {
@@ -67,6 +73,25 @@ export const authSlice = createSlice<AuthSchema, SliceCaseReducers<AuthSchema>>(
         .addCase(fetchRegistration.rejected, (state, action) => {
           state.errorRegistered = action.payload?.message?.toUpperCase();
           state.loadingRegistered = FetchStatus.REJECTED;
+        });
+      builder
+        .addCase(fetchAuthMe.pending, state => {
+          state.errorAuthMe = null;
+          state.loadingAuthMe = FetchStatus.PENDING;
+        })
+        .addCase(fetchAuthMe.fulfilled, (state, action) => {
+          if(action.payload.isAuth){
+            setTokenInCookie(action.payload.token);
+          state.authData = action.payload;
+          }else {
+            Cookies.remove('auth_token');
+            state.authData = initialState.authData
+          }
+          state.loadingAuthMe = FetchStatus.SUCCESS;
+        })
+        .addCase(fetchAuthMe.rejected, (state, action) => {
+          state.errorAuthMe = action.payload?.message?.toUpperCase();
+          state.loadingAuthMe = FetchStatus.REJECTED;
         });
     },
   }

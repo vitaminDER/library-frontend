@@ -5,5 +5,6 @@ export const QUERY = {
   deleteItemBookUrl: "api/admin/book",
   getProfileUrl: "api/profile",
   postAuthUrl: "api/auth/signin",
+  getAuthMeUrl: "api/auth/authme",
   postRegistrationUrl: "api/auth/signup",
 };
