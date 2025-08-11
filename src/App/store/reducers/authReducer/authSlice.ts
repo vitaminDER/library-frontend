@@ -6,7 +6,7 @@ import {
 
 import {
   AuthData,
-  AuthSchema,
+  AuthSchema, Role,
   UserRole,
 } from "@/App/store/reducers/authReducer/authSchema";
 import { fetchAuth } from "@/App/store/reducers/authReducer/services/fetchAuth";
@@ -15,12 +15,17 @@ import { FetchStatus } from "@/App/store/storeTypes";
 
 const initialState: AuthSchema = {
   authData: {
-    id: "",
-    login: "",
-    role: [UserRole.ADMIN],
+    id: null,
+    firstName: null,
+    lastName: null,
+    email: '',
+    userName:null,
+    login: '',
+    role: "ROLE_USER",
+    token: '',
     isAuth: false,
-    isRegistered: false,
   },
+  isRegistered:false,
   loadingAuth: FetchStatus.IDLE,
   errorAuth: null,
   loadingRegistered: FetchStatus.IDLE,
@@ -54,7 +59,7 @@ export const authSlice = createSlice<AuthSchema, SliceCaseReducers<AuthSchema>>(
           state.loadingRegistered = FetchStatus.PENDING;
         })
         .addCase(fetchRegistration.fulfilled, (state, action) => {
-          state.authData.isRegistered = action.payload.isRegistered;
+          state.isRegistered = action.payload.isRegistered;
           state.loadingRegistered = FetchStatus.SUCCESS;
         })
         .addCase(fetchRegistration.rejected, (state, action) => {
