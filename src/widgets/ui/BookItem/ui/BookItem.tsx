@@ -48,7 +48,7 @@ export const BookItem = () => {
     if (bookId) {
       // dispatch(booksSliceActions.deleteItem(id))
       dispatch(deleteItemBook(bookId));
-      dispatch(fetchBooks());
+      // dispatch(fetchBooks());
       navigate(PATH.BASE);
     }
   };
