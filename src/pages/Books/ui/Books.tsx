@@ -19,7 +19,7 @@ export const Books = () => {
 
   useEffect(() => {
     dispatch(fetchBooks());
-  }, []);
+  }, [allBooks.length]);
 
   const booksList = useMemo(() => {
     return allBooks.map(el => {
