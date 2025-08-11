@@ -44,9 +44,11 @@ export const BookItem = () => {
       </span>
     );
   });
-  const deleteHandler = (id: string | undefined) => {
-    if (id) {
+  const deleteHandler = () => {
+    if (bookId) {
+      // dispatch(booksSliceActions.deleteItem(id))
       dispatch(deleteItemBook(id));
+      dispatch(fetchBooks());
       navigate(PATH.BASE);
     }
   };
@@ -87,12 +89,7 @@ export const BookItem = () => {
       <ButtonBlock>
         {isAuth && role === UserRole.ADMIN ? (
           <ButtonContainer>
-            <Button variant="outlined" onClick={() => {
-              if(bookId){
-              deleteHandler(bookId);
-              dispatch(booksSliceActions.deleteItem(bookId))
-              }
-            }}>
+            <Button variant="outlined" onClick={deleteHandler}>
               Удалить
             </Button>
           </ButtonContainer>
