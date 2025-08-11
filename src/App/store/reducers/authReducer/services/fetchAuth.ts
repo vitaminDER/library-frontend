@@ -25,7 +25,7 @@ export const fetchAuth = createAsyncThunk<
   }
 >("fetchAuth", async (params, thunkAPI) => {
   try {
-    const response = await api.post<AuthData>(QUERY.getItemBookUrl, params);
+    const response = await api.post<AuthData>(QUERY.postAuthUrl, params);
     return response.data;
   } catch (e) {
     const error = e as AxiosError<RequestError>;
