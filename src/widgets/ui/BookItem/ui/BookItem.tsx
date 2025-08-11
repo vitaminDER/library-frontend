@@ -24,6 +24,7 @@ import {
   LinkBox,
 } from "./styles";
 import {fetchBooks} from "@/App/store/reducers/booksReducer/services";
+import {booksSliceActions} from "@/App/store/reducers/booksReducer/booksSlice";
 
 export const BookItem = () => {
   const { isAuth, role } = useAuth();
@@ -87,8 +88,10 @@ export const BookItem = () => {
         {isAuth && role === UserRole.ADMIN ? (
           <ButtonContainer>
             <Button variant="outlined" onClick={() => {
+              if(bookId){
               deleteHandler(bookId);
-              dispatch(fetchBooks());
+              dispatch(booksSliceActions.deleteItem(bookId))
+              }
             }}>
               Удалить
             </Button>

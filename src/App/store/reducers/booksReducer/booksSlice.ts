@@ -1,8 +1,9 @@
-import { createSlice } from "@reduxjs/toolkit";
+import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 
 import { BooksScheme } from "@/App/store/reducers/booksReducer/booksScheme";
 import { fetchBooks } from "@/App/store/reducers/booksReducer/services";
 import { FetchStatus } from "@/App/store/storeTypes";
+import {ReviewsScheme} from "@/App/store/reducers/reviewsReducer/reviewsScheme";
 
 // const mockBooks: IBooks[] = [
 //     {
@@ -27,7 +28,11 @@ const initialState: BooksScheme = {
 const booksSlice = createSlice({
   name: "books",
   initialState,
-  reducers: {},
+  reducers: {
+    deleteItem(state, action:PayloadAction<string>) {
+      state.books = state.books.filter(book => book.id !== action.payload);
+    },
+  },
   extraReducers: builder => {
     builder
       .addCase(fetchBooks.pending, state => {
