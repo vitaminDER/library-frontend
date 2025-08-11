@@ -24,7 +24,7 @@ export const fetchRegistration = createAsyncThunk<
 >("fetchRegistration", async (params, thunkAPI) => {
   try {
     const response = await api.post<ResponseRegistration>(
-      QUERY.postAuthUrl,
+      QUERY.postRegistrationUrl,
       params
     );
     return response.data;
