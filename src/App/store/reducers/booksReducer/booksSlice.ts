@@ -36,6 +36,7 @@ const booksSlice = createSlice({
   extraReducers: builder => {
     builder
       .addCase(fetchBooks.pending, state => {
+        state.errorBooks = null;
         state.loadingBooks = FetchStatus.PENDING;
       })
       .addCase(fetchBooks.fulfilled, (state, action) => {
