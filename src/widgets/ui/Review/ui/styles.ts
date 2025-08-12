@@ -9,13 +9,14 @@ export const ReviewWrapper = styled.div`
 `;
 
 export const ReviewContainer = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  gap: 16px;
-  color: #09090c;
-  font-family: "Apple SD Gothic Neo";
-  font-size: 14px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+    color: #09090c;
+    font-family: "Apple SD Gothic Neo";
+    font-size: 14px;
+    
 `;
 
 export const ReviewInfo = styled.div`
@@ -25,26 +26,29 @@ export const ReviewInfo = styled.div`
   gap: 10px;
 `;
 export const ReviewTextComment = styled.div`
-  min-height: 40px;
-  box-sizing: border-box;
-  border-radius: 4px;
-  padding: 10px;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  justify-content: space-between;
-  background-color: #f9f9f9;
+    position: relative;
+    min-height: 40px;
+    box-sizing: border-box;
+    border-radius: 4px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    justify-content: space-between;
+    background-color: #f9f9f9;
+    box-shadow: -1px 3px 8px 0px rgba(34, 60, 80, 0.2);
 
-  &:before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    margin-left: -10px;
-    border-width: 10px;
-    border-style: solid;
-    border-color: #f9f9f9 transparent transparent transparent;
-  }
+
+    &:before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        margin-left: -10px;
+        border-width: 10px;
+        border-style: solid;
+        border-color: #f9f9f9 transparent transparent transparent;
+    }
 `;
 
 export const DateContainer = styled.div`

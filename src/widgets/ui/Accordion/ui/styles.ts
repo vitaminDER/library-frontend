@@ -1,26 +1,35 @@
 import styled from "styled-components";
 
 export const AccordionCollapsed = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  padding: 20px;
-  box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    box-sizing: border-box;
+    //border-radius: 8px;
+    border-top: 1px solid rgba(65, 61, 59, 0.18);
+    border-radius: 0 0 8px 8px;
+    
+    &:hover {
+        cursor: pointer;
+        background-color: #e0ccbc2e;
+    }
 `;
 
 export const AccordionUnCollapsed = styled.div`
-  display: flex;
-  flex-direction: column;
-  padding: 10px 20px;
-  box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    padding: 10px 20px;
+    border-top: 1px solid rgba(65, 61, 59, 0.18);
+    box-sizing: border-box;
 `;
 export const ReviewContainer = styled.div`
-  width: 80%;
+  width: 900px;
   display: flex;
   flex-direction: column;
   border-radius: 8px;
-  background-color: #9256212e;
+  background-color: #eddfd32e;
 `;
 
 export const PaginationContainer = styled.div`
