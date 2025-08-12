@@ -24,7 +24,7 @@ export const CreateReview = () => {
         setIsVisibleNewReview(false)
     }
     return (
-        <CreateReviewWrapper>
+        <CreateReviewWrapper isHover={!isVisibleNewReview}>
             {isVisibleNewReview ?
                 <CreateReviewFormContainer>
                     <ReviewHeader>Ваш отзыв <ClearIcon fontSize={'small'} onClick={() => setIsVisibleNewReview(false)}/></ReviewHeader>

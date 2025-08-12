@@ -1,17 +1,20 @@
 import styled from "styled-components";
+interface CreateReviewWrapperProps {
+    isHover:boolean;
+}
 
-export const CreateReviewWrapper = styled.div`
+export const CreateReviewWrapper = styled.div<CreateReviewWrapperProps>`
     display: flex;
     flex-direction: column;
     padding: 20px;
     border-radius: 8px;
-    //background-color: #eddfd32e;
     box-sizing: border-box;
-    
-    &:hover{
+    ${({ isHover }) => isHover && `
+      &:hover{
         cursor: pointer;
         background-color: #e0ccbc2e;
-    }
+    }`}
+    
 `;
 
 export const ReviewHeader= styled.div`
