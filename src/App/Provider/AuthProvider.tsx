@@ -14,22 +14,22 @@ const AuthProvider = (props: AuthProviderProps) => {
     const {children} = props;
     const dispatch = useAppDispatch();
     const {loadingAuthMe} = useAppSelector(getAuth);
-
-    // const checkAuth = ()=>{
-    //     const token = getTokenFromCookie();
-    //     if (token) {
-    //         dispatch(fetchAuthMe());
-    //     }
-    // }
+    const token = getTokenFromCookie();
 
     useEffect(() => {
-        const token = getTokenFromCookie();
         if (token) {
-            // dispatch(fetchAuthMe());
-            setInterval(()=>{
-                dispatch(fetchAuthMe());
-            }, 30000);
+            dispatch(fetchAuthMe());
         }
+    }, []);
+
+
+    useEffect(() => {
+        // const token = getTokenFromCookie();
+        setInterval(() => {
+            if (token) {
+                dispatch(fetchAuthMe());
+            }
+        }, 30000);
         // const intervalId = setInterval(checkAuth, 30000);
         //
         // function stopPeriodicTask() {
