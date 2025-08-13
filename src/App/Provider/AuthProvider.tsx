@@ -15,25 +15,25 @@ const AuthProvider = (props: AuthProviderProps) => {
     const dispatch = useAppDispatch();
     const {loadingAuthMe} = useAppSelector(getAuth);
 
-    const checkAuth = ()=>{
+    // const checkAuth = ()=>{
+    //     const token = getTokenFromCookie();
+    //     if (token) {
+    //         dispatch(fetchAuthMe());
+    //     }
+    // }
+
+    useEffect(() => {
         const token = getTokenFromCookie();
         if (token) {
             dispatch(fetchAuthMe());
         }
-    }
-
-    useEffect(() => {
-        // const token = getTokenFromCookie();
-        // if (token) {
-        //     dispatch(fetchAuthMe());
+        // const intervalId = setInterval(checkAuth, 30000);
+        //
+        // function stopPeriodicTask() {
+        //     clearInterval(intervalId);
+        //     console.log("Периодическая задача остановлена");
         // }
-        const intervalId = setInterval(checkAuth, 30000);
-
-        function stopPeriodicTask() {
-            clearInterval(intervalId);
-            console.log("Периодическая задача остановлена");
-        }
-        setTimeout(stopPeriodicTask, 120000);
+        // setTimeout(stopPeriodicTask, 120000);
 
     }, []);
 
