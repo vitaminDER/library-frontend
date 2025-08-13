@@ -7,4 +7,5 @@ export const QUERY = {
   postAuthUrl: "api/auth/signin",
   getAuthMeUrl: "api/auth/me",
   postRegistrationUrl: "api/auth/signup",
+  postReviewUrl: "api/review",
 };

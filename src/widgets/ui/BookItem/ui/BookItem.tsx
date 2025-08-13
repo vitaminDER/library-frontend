@@ -57,9 +57,9 @@ export const BookItem = () => {
         dispatch(fetchItemBook({id: bookId}));
     }, []);
 
-    // if (errorBooks) {
-    //   return <ErrorComponent title={errorBooks} />;
-    // }
+    if (errorBooks) {
+      return <ErrorComponent title={errorBooks} />;
+    }
 
     return (
         <InfoBookWrapper>

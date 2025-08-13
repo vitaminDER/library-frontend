@@ -20,14 +20,21 @@ export const CreateReview = () => {
         setTextAria(value)
         }
     }
+
+    const handleCloseReview = () => {
+        setTextAria('');
+        setIsVisibleNewReview(false);
+    }
     const createReview = () => {
         setIsVisibleNewReview(false)
     }
+
+
     return (
         <CreateReviewWrapper isHover={!isVisibleNewReview}>
             {isVisibleNewReview ?
                 <CreateReviewFormContainer>
-                    <ReviewHeader>Ваш отзыв <ClearIcon fontSize={'small'} onClick={() => setIsVisibleNewReview(false)}/></ReviewHeader>
+                    <ReviewHeader>Ваш отзыв <ClearIcon fontSize={'small'} onClick={handleCloseReview}/></ReviewHeader>
                     <TextAriaBox>
                         <TextAriaCount>
                             <span>{textAria.length} / 3000</span>

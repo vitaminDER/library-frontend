@@ -20,7 +20,7 @@ const initialState: AuthSchema = {
     login: '',
     role: "ROLE_USER",
     token: '',
-    isAuth: true,
+    isAuth: false,
   },
   isRegistered:false,
   loadingAuth: FetchStatus.IDLE,
