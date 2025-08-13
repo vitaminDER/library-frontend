@@ -5,6 +5,7 @@ import {fetchAuthMe} from "@/App/store/reducers/authReducer/services/fetchAuthMe
 import {getAuth} from "@/App/store/reducers/authReducer/authSelectors";
 import {FetchStatus} from "@/App/store/storeTypes";
 import {CircularProgress} from "@mui/material";
+import {authSliceAction} from "@/App/store/reducers/authReducer/authSlice";
 
 interface AuthProviderProps {
     children: JSX.Element;
@@ -25,11 +26,13 @@ const AuthProvider = (props: AuthProviderProps) => {
 
     useEffect(() => {
         // const token = getTokenFromCookie();
-        setInterval(() => {
             if (token) {
+        setInterval(() => {
                 dispatch(fetchAuthMe());
-            }
         }, 30000);
+            }else {
+                dispatch(authSliceAction.setLogout())
+            }
         // const intervalId = setInterval(checkAuth, 30000);
         //
         // function stopPeriodicTask() {
