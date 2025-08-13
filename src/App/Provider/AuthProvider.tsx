@@ -25,7 +25,10 @@ const AuthProvider = (props: AuthProviderProps) => {
     useEffect(() => {
         const token = getTokenFromCookie();
         if (token) {
-            dispatch(fetchAuthMe());
+            // dispatch(fetchAuthMe());
+            setInterval(()=>{
+                dispatch(fetchAuthMe());
+            }, 30000);
         }
         // const intervalId = setInterval(checkAuth, 30000);
         //
