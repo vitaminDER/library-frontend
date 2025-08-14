@@ -9,8 +9,8 @@ import {getTokenFromCookie} from "@/App/store/reducers/authReducer/utils";
 
 export interface RequestReview {
     bookId: string;
-    personId:string;
-    comment:string;
+    personId: string;
+    comment: string;
 }
 
 export const createReview = createAsyncThunk<
@@ -22,11 +22,13 @@ export const createReview = createAsyncThunk<
 >("createReview", async (params, thunkAPI) => {
     try {
         const response = await api.post<ResponseUserReview>(
-            QUERY.postReviewUrl,
-            {  params, headers: {
+            QUERY.postReviewUrl, params,
+            {
+                headers: {
                     Authorization: `Bearer ${getTokenFromCookie()}`,
                     Accept: 'application/json'
-                }},
+                }
+            },
         );
         return response.data;
     } catch (e) {
