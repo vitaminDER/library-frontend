@@ -25,9 +25,10 @@ import {
 } from "./styles";
 import {fetchBooks} from "@/App/store/reducers/booksReducer/services";
 import {booksSliceActions} from "@/App/store/reducers/booksReducer/booksSlice";
+import {fetchUserReview, RequestUserReview} from "@/App/store/reducers/reviewsReducer/services/fetchUserReview";
 
 export const BookItem = () => {
-    const {isAuth, role} = useAuth();
+    const authUserData = useAuth();
     const {id} = useParams();
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
@@ -54,6 +55,13 @@ export const BookItem = () => {
 
     useEffect(() => {
         dispatch(fetchItemBook({id: bookId}));
+        if (authUserData.isAuth && authUserData.id) {
+            const requestUserReview: RequestUserReview = {
+                bookId: book.id,
+                personId: authUserData.id.toString(),
+            }
+            dispatch(fetchUserReview(requestUserReview));
+        }
     }, []);
 
     if (errorBooks) {
@@ -86,7 +94,7 @@ export const BookItem = () => {
                 </InfoBook>
             </InfoBookContainer>
             <ButtonBlock>
-                {isAuth && role === UserRole.ADMIN ? (
+                {authUserData.isAuth && authUserData.role === UserRole.ADMIN ? (
                     <ButtonContainer>
                         <Button variant="outlined" onClick={deleteHandler}>
                             Удалить

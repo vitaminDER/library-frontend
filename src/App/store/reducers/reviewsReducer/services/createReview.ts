@@ -4,27 +4,23 @@ import {api} from "@/utils/api/api";
 import {QUERY} from "@/App/store/backend/constants";
 import type {AxiosError} from "axios";
 import {RequestRegistration} from "@/App/store/reducers/authReducer/services/fetchRegistration";
+import {ResponseUserReview} from "@/App/store/reducers/reviewsReducer/services/fetchUserReview";
 
 export interface RequestReview {
     bookId: string;
     personId:string;
     comment:string;
 }
-export interface ResponseReview {
-    id: string;
-    comment:string;
-    createdDate:string;
-}
 
 export const createReview = createAsyncThunk<
-    ResponseReview,
+    ResponseUserReview,
     RequestReview,
     {
         rejectValue: RequestError;
     }
 >("createReview", async (params, thunkAPI) => {
     try {
-        const response = await api.post<ResponseReview>(
+        const response = await api.post<ResponseUserReview>(
             QUERY.postReviewUrl,
             params
         );

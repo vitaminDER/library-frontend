@@ -7,11 +7,12 @@ import type {AxiosError} from "axios";
 export interface RequestUserReview {
     bookId: string;
     personId:string;
-    // comment:string;
 }
 export interface ResponseUserReview {
-    id: string;
-    comment:string;
+    bookId: number | null;
+    personId: number |null;
+    reviewId:number |null;
+    comment:string
     createdDate:string;
 }
 

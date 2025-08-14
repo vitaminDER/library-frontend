@@ -56,7 +56,7 @@ export const CreateReview = () => {
     useEffect(() => {
         if (userAuthData.id) {
             const requestUserReview: RequestUserReview = {
-                bookId: book?.id,
+                bookId: book.id,
                 personId: userAuthData.id.toString(),
             }
             dispatch(fetchUserReview(requestUserReview));
