@@ -16,7 +16,7 @@ const AuthProvider = (props: AuthProviderProps) => {
     const dispatch = useAppDispatch();
     const {loadingAuthMe} = useAppSelector(getAuth);
     const token = getTokenFromCookie();
-    const checkTimeInterval = 30 * 60 * 1000;
+    const checkTimeInterval = 60 * 60 * 1000;
 
     useEffect(() => {
         if (token) {
@@ -33,7 +33,7 @@ const AuthProvider = (props: AuthProviderProps) => {
                 dispatch(authSliceAction.setLogout());
                 clearInterval(intervalId);
             }
-        }, 3000);
+        }, checkTimeInterval);
 
     }, []);
 
