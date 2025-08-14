@@ -55,9 +55,9 @@ export const BookItem = () => {
 
     useEffect(() => {
         dispatch(fetchItemBook({id: bookId}));
-        if (authUserData.isAuth && authUserData.id) {
+        if (authUserData.isAuth && authUserData.id && bookId) {
             const requestUserReview: RequestUserReview = {
-                bookId: book.id,
+                bookId: bookId,
                 personId: authUserData.id.toString(),
             }
             dispatch(fetchUserReview(requestUserReview));

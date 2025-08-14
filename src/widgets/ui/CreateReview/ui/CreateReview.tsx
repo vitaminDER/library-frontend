@@ -15,14 +15,15 @@ import {getReviews} from "@/App/store/reducers/reviewsReducer/selectors";
 import {getItemBookSelector} from "@/App/store/reducers/bookItemReducer/selectors";
 import {createReview, RequestReview} from "@/App/store/reducers/reviewsReducer/services/createReview";
 import {clearUserReview} from "@/App/store/reducers/reviewsReducer/reviewsSlice";
+import {FetchStatus} from "@/App/store/storeTypes";
 
 export const CreateReview = () => {
     const userAuthData = useAuth();
     const dispatch = useAppDispatch();
     const {book} = useAppSelector(getItemBookSelector);
-    const {userReview} = useAppSelector(getReviews);
+    const {userReview, loadingUserReview} = useAppSelector(getReviews);
     const [isVisibleNewReview, setIsVisibleNewReview] = useState(false);
-    const [comment, setComment] = useState(userReview.comment)
+    const [comment, setComment] = useState('')
 
 
     const handleChangeTextAria = (e: ChangeEvent<HTMLTextAreaElement>) => {
@@ -63,6 +64,13 @@ export const CreateReview = () => {
         }
     }, []);
 
+
+    useEffect(() => {
+        if(loadingUserReview === FetchStatus.SUCCESS){
+        setComment(userReview.comment)
+
+        }
+    }, [userReview ]);
 
     return (
         <CreateReviewWrapper isHover={!isVisibleNewReview}>
