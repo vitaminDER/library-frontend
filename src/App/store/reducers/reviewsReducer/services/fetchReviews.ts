@@ -5,6 +5,7 @@ import { QUERY } from "@/App/store/backend/constants";
 import { Reviews } from "@/App/store/reducers/reviewsReducer/reviewsScheme";
 import { RequestError } from "@/App/store/storeTypes";
 import { api } from "@/utils/api/api";
+import {getTokenFromCookie} from "@/App/store/reducers/authReducer/utils";
 
 interface RequestReviews {
   bookId: string | undefined;
@@ -20,7 +21,10 @@ export const fetchReviews = createAsyncThunk<
   }
 >("fetchReviews", async (params, thunkAPI) => {
   try {
-    const response = await api.get<Reviews>(QUERY.getReviewsUrl, { params });
+    const response = await api.get<Reviews>(QUERY.getReviewsUrl, { params ,headers: {
+        Authorization: `Bearer ${getTokenFromCookie()}`,
+        Accept: 'application/json'
+      }} );
     return response.data;
   } catch (e) {
     const error = e as AxiosError<RequestError>;
