@@ -1,4 +1,4 @@
-import React, {JSX, useEffect} from 'react';
+import React, {createContext, JSX, useContext, useEffect, useState} from 'react';
 import {getTokenFromCookie} from "@/App/store/reducers/authReducer/utils";
 import {useAppDispatch, useAppSelector} from "@/App/store/storeHooks";
 import {fetchAuthMe} from "@/App/store/reducers/authReducer/services/fetchAuthMe";
@@ -16,6 +16,7 @@ const AuthProvider = (props: AuthProviderProps) => {
     const dispatch = useAppDispatch();
     const {loadingAuthMe} = useAppSelector(getAuth);
     const token = getTokenFromCookie();
+    const checkTimeInterval = 30 * 60 * 1000;
 
     useEffect(() => {
         if (token) {
@@ -25,27 +26,20 @@ const AuthProvider = (props: AuthProviderProps) => {
 
 
     useEffect(() => {
-        // const token = getTokenFromCookie();
-            if (token) {
-        setInterval(() => {
+        const intervalId = setInterval(()=>{
+            if(token){
                 dispatch(fetchAuthMe());
-        }, 30000);
             }else {
-                dispatch(authSliceAction.setLogout())
+                dispatch(authSliceAction.setLogout());
+                clearInterval(intervalId);
             }
-        // const intervalId = setInterval(checkAuth, 30000);
-        //
-        // function stopPeriodicTask() {
-        //     clearInterval(intervalId);
-        //     console.log("Периодическая задача остановлена");
-        // }
-        // setTimeout(stopPeriodicTask, 120000);
+        }, checkTimeInterval);
 
     }, []);
 
     return (
         <>
-            {loadingAuthMe === FetchStatus.PENDING ? <CircularProgress size="30px"/> : children}
+            {children}
         </>
     );
 };

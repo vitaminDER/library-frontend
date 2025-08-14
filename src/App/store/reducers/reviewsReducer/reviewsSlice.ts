@@ -2,7 +2,11 @@ import { createSlice } from "@reduxjs/toolkit";
 
 import { ReviewsScheme } from "@/App/store/reducers/reviewsReducer/reviewsScheme";
 import { fetchReviews } from "@/App/store/reducers/reviewsReducer/services/fetchReviews";
-import { FetchStatus } from "@/App/store/storeTypes";
+import {FetchStatus, Nullable} from "@/App/store/storeTypes";
+import {fetchRegistration} from "@/App/store/reducers/authReducer/services/fetchRegistration";
+import {fetchUserReview} from "@/App/store/reducers/reviewsReducer/services/fetchUserReview";
+import {createReview} from "@/App/store/reducers/reviewsReducer/services/createReview";
+import {deleteUserReview} from "@/App/store/reducers/reviewsReducer/services/deleteUserReview";
 
 // const reviewMock = {
 //     content: [
@@ -50,6 +54,13 @@ const initialState: ReviewsScheme = {
     pageSize: 5,
     totalPages: 5,
   },
+  userReview:{
+    id: '',
+    comment:'',
+    createdDate:'',
+  },
+  loadingUserReview: FetchStatus.IDLE,
+  errorUserReview: null,
   loadingReviews: FetchStatus.IDLE,
   errorReviews: null,
 };
@@ -61,8 +72,50 @@ const reviewsSlice = createSlice({
     setPagination(state: ReviewsScheme, action) {
       state.reviews.pageNumber = action.payload;
     },
+      clearUserReview(state: ReviewsScheme) {
+      state.userReview = initialState.userReview;
+    },
   },
   extraReducers: builder => {
+    builder
+        .addCase(deleteUserReview.pending, state => {
+          state.errorUserReview = null;
+          state.loadingUserReview = FetchStatus.PENDING;
+        })
+        .addCase(deleteUserReview.fulfilled, (state, action) => {
+          state.userReview = initialState.userReview;
+          state.loadingUserReview = FetchStatus.SUCCESS;
+        })
+        .addCase(deleteUserReview.rejected, (state, action) => {
+          state.errorUserReview = action.payload?.message?.toUpperCase();
+          state.loadingUserReview = FetchStatus.REJECTED;
+        });
+    builder
+        .addCase(fetchUserReview.pending, state => {
+          state.errorUserReview = null;
+          state.loadingUserReview = FetchStatus.PENDING;
+        })
+        .addCase(fetchUserReview.fulfilled, (state, action) => {
+          state.userReview = action.payload;
+          state.loadingUserReview = FetchStatus.SUCCESS;
+        })
+        .addCase(fetchUserReview.rejected, (state, action) => {
+          state.errorUserReview = action.payload?.message?.toUpperCase();
+          state.loadingUserReview = FetchStatus.REJECTED;
+        });
+    builder
+        .addCase(createReview.pending, state => {
+          state.errorUserReview = null;
+          state.loadingUserReview = FetchStatus.PENDING;
+        })
+        .addCase(createReview.fulfilled, (state, action) => {
+          state.userReview = action.payload;
+          state.loadingUserReview = FetchStatus.SUCCESS;
+        })
+        .addCase(createReview.rejected, (state, action) => {
+          state.errorUserReview = action.payload?.message?.toUpperCase();
+          state.loadingUserReview = FetchStatus.REJECTED;
+        });
     builder
       .addCase(fetchReviews.pending, state => {
         state.loadingReviews = FetchStatus.PENDING;
@@ -83,5 +136,5 @@ const reviewsSlice = createSlice({
   },
 });
 
-export const { setPagination } = reviewsSlice.actions;
+export const { setPagination, clearUserReview } = reviewsSlice.actions;
 export const reviewsSliceReducer = reviewsSlice.reducer;

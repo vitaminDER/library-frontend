@@ -1,12 +1,21 @@
 import {createSlice, SliceCaseReducers} from "@reduxjs/toolkit";
 
-import {BookItemScheme} from "@/App/store/reducers/bookItemReducer/bookItemSheme";
+import {BookItemScheme, Genre} from "@/App/store/reducers/bookItemReducer/bookItemSheme";
 import {deleteItemBook} from "@/App/store/reducers/bookItemReducer/services/deleteItemBook";
 import {fetchItemBook} from "@/App/store/reducers/bookItemReducer/services/fetchItemBook";
 import {FetchStatus} from "@/App/store/storeTypes";
 
 const initialState: BookItemScheme = {
-    book: null,
+    book: {
+        id: '',
+        title: '',
+        author: '',
+        year: 0,
+        rating: 0,
+        description: '',
+        genre: [],
+        image: '',
+    },
     loadingBooks: FetchStatus.IDLE,
     errorBooks: null,
 };
@@ -38,7 +47,7 @@ const bookItemSlice = createSlice<
                 state.loadingBooks = FetchStatus.PENDING;
             })
             .addCase(deleteItemBook.fulfilled, state => {
-                state.book = null;
+                state.book = initialState.book;
                 state.loadingBooks = FetchStatus.SUCCESS;
             })
             .addCase(deleteItemBook.rejected, (state, action) => {

@@ -46,8 +46,7 @@ export const BookItem = () => {
     });
     const deleteHandler = () => {
         if (bookId) {
-            // dispatch(booksSliceActions.deleteItem(id))
-            dispatch(deleteItemBook(bookId));
+            dispatch(deleteItemBook(book.id));
             dispatch(fetchBooks());
             navigate(PATH.BASE);
         }
@@ -72,18 +71,18 @@ export const BookItem = () => {
                 {book?.image ? (
                     <img src={book.image} width={200} height={300} alt={"imag"}/>
                 ) : (
-                    <BookImage bookName={book?.title} author={book?.author}/>
+                    <BookImage bookName={book.title} author={book.author}/>
                 )}
 
                 <InfoBook>
                     <Rating rating={book ? book.rating : 0}/>
-                    <h3> {book?.title.toUpperCase()}</h3>
-                    <div>Автор: {book?.author}</div>
+                    <h3> {book.title.toUpperCase()}</h3>
+                    <div>Автор: {book.author}</div>
 
                     <div>Год издания: {year}</div>
-                    <div>Описание: {book?.description}</div>
+                    <div>Описание: {book.description}</div>
                     <div> Жанр: {genreList}</div>
-                    <div>Рейтинг: {book?.rating}</div>
+                    <div>Рейтинг: {book.rating}</div>
                 </InfoBook>
             </InfoBookContainer>
             <ButtonBlock>

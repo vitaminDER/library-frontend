@@ -6,7 +6,7 @@ import {ChangeEvent, useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
 
 import {setPagination} from "@/App/store/reducers/reviewsReducer/reviewsSlice";
-import {getReviews} from "@/App/store/reducers/reviewsReducer/selectors";
+import {getReviews, getUserReview} from "@/App/store/reducers/reviewsReducer/selectors";
 import {fetchReviews} from "@/App/store/reducers/reviewsReducer/services/fetchReviews";
 import {useAppDispatch, useAppSelector} from "@/App/store/storeHooks";
 import {FetchStatus} from "@/App/store/storeTypes";
@@ -19,10 +19,13 @@ import {
     ReviewContainer,
 } from "./styles";
 import {CreateReview} from "@/widgets/ui/CreateReview/ui/CreateReview";
+import {useAuth} from "@/App/store/hooks/useAuth";
+import {fetchUserReview} from "@/App/store/reducers/reviewsReducer/services/fetchUserReview";
 
 export const Accordion = () => {
     const {id} = useParams();
     const bookId = id?.slice(1);
+    const userAuthData = useAuth();
     const dispatch = useAppDispatch();
     const {reviews, loadingReviews} = useAppSelector(getReviews);
     const [isVisible, setIsVisible] = useState(false);
@@ -37,18 +40,22 @@ export const Accordion = () => {
     };
 
     useEffect(() => {
-        const request = {
+
+        const requestReviews = {
             bookId: bookId,
             pageNumber: reviews.pageNumber,
             pageSize: reviews.pageSize,
         };
         if (isVisible) {
-            dispatch(fetchReviews(request));
+            dispatch(fetchReviews(requestReviews));
         }
+
     }, [bookId, reviews.pageNumber, isVisible, reviews.pageSize]);
+
+
     return (
         <ReviewContainer>
-            <CreateReview/>
+            {userAuthData.isAuth && <CreateReview/>}
             <AccordionCollapsed onClick={visibleHandler}>
                 <div>Отзывы</div>
                 {loadingReviews === FetchStatus.PENDING && <CircularProgress size="20px"/>}

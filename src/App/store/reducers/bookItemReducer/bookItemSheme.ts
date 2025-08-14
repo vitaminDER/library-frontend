@@ -17,7 +17,7 @@ export interface BookItem {
 }
 
 export interface BookItemScheme {
-  book: Nullable<BookItem>;
+  book: BookItem;
   loadingBooks: FetchStatus;
   errorBooks: Nullable<string> | undefined;
 }

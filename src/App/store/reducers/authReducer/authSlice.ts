@@ -77,7 +77,9 @@ export const authSlice = createSlice(
         .addCase(fetchAuthMe.fulfilled, (state, action) => {
           if(action.payload.isAuth){
             setTokenInCookie(action.payload.token);
+            if(!state.authData.id){
           state.authData = action.payload;
+            }
           }else {
             Cookies.remove('token');
             state.authData = initialState.authData
