@@ -23,10 +23,10 @@ export const createReview = createAsyncThunk<
     try {
         const response = await api.post<ResponseUserReview>(
             QUERY.postReviewUrl,
-            { ...params ,headers: {
+            {  params, headers: {
                     Authorization: `Bearer ${getTokenFromCookie()}`,
                     Accept: 'application/json'
-                }}
+                }},
         );
         return response.data;
     } catch (e) {
