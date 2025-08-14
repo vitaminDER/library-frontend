@@ -33,7 +33,7 @@ const AuthProvider = (props: AuthProviderProps) => {
                 dispatch(authSliceAction.setLogout());
                 clearInterval(intervalId);
             }
-        }, checkTimeInterval);
+        }, 3000);
 
     }, []);
 
