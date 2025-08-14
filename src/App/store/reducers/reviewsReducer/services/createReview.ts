@@ -5,6 +5,7 @@ import {QUERY} from "@/App/store/backend/constants";
 import type {AxiosError} from "axios";
 import {RequestRegistration} from "@/App/store/reducers/authReducer/services/fetchRegistration";
 import {ResponseUserReview} from "@/App/store/reducers/reviewsReducer/services/fetchUserReview";
+import {getTokenFromCookie} from "@/App/store/reducers/authReducer/utils";
 
 export interface RequestReview {
     bookId: string;
@@ -22,7 +23,10 @@ export const createReview = createAsyncThunk<
     try {
         const response = await api.post<ResponseUserReview>(
             QUERY.postReviewUrl,
-            params
+            { ...params ,headers: {
+                    Authorization: `Bearer ${getTokenFromCookie()}`,
+                    Accept: 'application/json'
+                }}
         );
         return response.data;
     } catch (e) {
