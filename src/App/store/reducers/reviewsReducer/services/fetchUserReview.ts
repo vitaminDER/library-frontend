@@ -3,6 +3,7 @@ import {RequestError} from "@/App/store/storeTypes";
 import {api} from "@/utils/api/api";
 import {QUERY} from "@/App/store/backend/constants";
 import type {AxiosError} from "axios";
+import {getTokenFromCookie} from "@/App/store/reducers/authReducer/utils";
 
 export interface RequestUserReview {
     bookId: string;
@@ -26,7 +27,10 @@ export const fetchUserReview = createAsyncThunk<
     try {
         const response = await api.get<ResponseUserReview>(
             QUERY.getUserReviewUrl,
-            {params}
+            { params ,headers: {
+                    Authorization: `Bearer ${getTokenFromCookie()}`,
+                    Accept: 'application/json'
+                }}
         );
         return response.data;
     } catch (e) {
