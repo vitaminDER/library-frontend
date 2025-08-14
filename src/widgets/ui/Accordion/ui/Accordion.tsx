@@ -46,9 +46,9 @@ export const Accordion = () => {
             pageNumber: reviews.pageNumber,
             pageSize: reviews.pageSize,
         };
-        if (isVisible) {
+        // if (isVisible) {
             dispatch(fetchReviews(requestReviews));
-        }
+        // }
 
     }, [bookId, reviews.pageNumber, isVisible, reviews.pageSize]);
 

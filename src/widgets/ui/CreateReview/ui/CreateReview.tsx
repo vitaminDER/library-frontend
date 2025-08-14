@@ -3,7 +3,9 @@ import {
     ButtonBox,
     CreateReviewFormContainer,
     CreateReviewWrapper,
-    ReviewHeader, TextAriaBox, TextAriaCount,
+    ReviewHeader,
+    TextAriaBox,
+    TextAriaCount,
     TextAriaResize
 } from "@/widgets/ui/CreateReview/ui/styles";
 import {Button} from "@mui/material";
@@ -50,7 +52,7 @@ export const CreateReview = () => {
         }
     }, [comment])
 
-    const deleteReviewHandler = ()=>{
+    const deleteReviewHandler = () => {
         dispatch(clearUserReview())
     }
 
@@ -66,11 +68,10 @@ export const CreateReview = () => {
 
 
     useEffect(() => {
-        if(loadingUserReview === FetchStatus.SUCCESS){
-        setComment(userReview.comment)
-
+        if (loadingUserReview === FetchStatus.SUCCESS) {
+            setComment(userReview.comment)
         }
-    }, [userReview ]);
+    }, [userReview]);
 
     return (
         <CreateReviewWrapper isHover={!isVisibleNewReview}>
