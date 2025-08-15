@@ -50,9 +50,10 @@ export const CreateReview = () => {
       if (bookId) {
         const requestCreateUserReview: RequestReview = {
           bookId: book.id,
-          personId: userAuthData.id.toString(),
+          personId: userAuthData.id,
           comment: comment,
         };
+        console.log(requestCreateUserReview);
         dispatch(createReview(requestCreateUserReview));
         setIsVisibleNewReview(false);
       }
