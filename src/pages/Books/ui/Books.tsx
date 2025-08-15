@@ -8,6 +8,7 @@ import {
   getLoadingBooksSelector,
 } from "@/App/store/reducers/booksReducer/selectors";
 import { fetchBooks } from "@/App/store/reducers/booksReducer/services";
+import { clearUserReview } from "@/App/store/reducers/reviewsReducer/reviewsSlice";
 import { useAppDispatch, useAppSelector } from "@/App/store/storeHooks";
 import { FetchStatus } from "@/App/store/storeTypes";
 import { BooksListContainer, BooksWrapper } from "@/pages/Books/ui/styles";
@@ -22,7 +23,8 @@ export const Books = () => {
 
   useEffect(() => {
     dispatch(fetchBooks());
-  }, []);
+    dispatch(clearUserReview());
+  }, [dispatch]);
 
   const booksList = useMemo(() => {
     return allBooks.map(el => {
