@@ -1,6 +1,7 @@
 import ClearIcon from "@mui/icons-material/Clear";
 import { Button } from "@mui/material";
 import React, { ChangeEvent, useCallback, useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 
 import { useAuth } from "@/App/store/hooks/useAuth";
 import { getItemBookSelector } from "@/App/store/reducers/bookItemReducer/selectors";
@@ -26,6 +27,8 @@ export const CreateReview = () => {
   const userAuthData = useAuth();
   const dispatch = useAppDispatch();
   const { book } = useAppSelector(getItemBookSelector);
+  const { id } = useParams();
+  const bookId = id?.slice(1);
   const { userReview, loadingUserReview } = useAppSelector(getReviews);
   const [isVisibleNewReview, setIsVisibleNewReview] = useState(false);
   const [comment, setComment] = useState("");
@@ -44,13 +47,15 @@ export const CreateReview = () => {
 
   const handleCreateReview = useCallback(() => {
     if (userAuthData.id) {
-      const requestCreateUserReview: RequestReview = {
-        bookId: book.id,
-        personId: userAuthData.id.toString(),
-        comment: comment,
-      };
-      dispatch(createReview(requestCreateUserReview));
-      setIsVisibleNewReview(false);
+      if (bookId) {
+        const requestCreateUserReview: RequestReview = {
+          bookId: book.id,
+          personId: userAuthData.id.toString(),
+          comment: comment,
+        };
+        dispatch(createReview(requestCreateUserReview));
+        setIsVisibleNewReview(false);
+      }
     }
   }, [book.id, comment, dispatch, userAuthData.id]);
 
