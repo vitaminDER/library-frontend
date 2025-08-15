@@ -9,6 +9,10 @@ import { useAuth } from "@/App/store/hooks/useAuth";
 import { setPagination } from "@/App/store/reducers/reviewsReducer/reviewsSlice";
 import { getReviews } from "@/App/store/reducers/reviewsReducer/selectors";
 import { fetchReviews } from "@/App/store/reducers/reviewsReducer/services/fetchReviews";
+import {
+  fetchUserReview,
+  RequestUserReview,
+} from "@/App/store/reducers/reviewsReducer/services/fetchUserReview";
 import { useAppDispatch, useAppSelector } from "@/App/store/storeHooks";
 import { FetchStatus } from "@/App/store/storeTypes";
 import { CreateReview } from "@/widgets/ui/CreateReview/ui/CreateReview";
@@ -39,13 +43,30 @@ export const Accordion = () => {
   };
 
   useEffect(() => {
-    const requestReviews = {
-      bookId: bookId,
-      pageNumber: reviews.pageNumber,
-      pageSize: reviews.pageSize,
-    };
-    dispatch(fetchReviews(requestReviews));
-  }, [bookId, reviews.pageNumber, isVisible, reviews.pageSize, dispatch]);
+    if (bookId) {
+      const requestReviews = {
+        bookId: bookId,
+        pageNumber: reviews.pageNumber,
+        pageSize: reviews.pageSize,
+      };
+      dispatch(fetchReviews(requestReviews));
+
+      if (userAuthData.id) {
+        const requestUserReview: RequestUserReview = {
+          bookId: bookId,
+          personId: userAuthData.id.toString(),
+        };
+        dispatch(fetchUserReview(requestUserReview));
+      }
+    }
+  }, [
+    bookId,
+    reviews.pageNumber,
+    isVisible,
+    reviews.pageSize,
+    dispatch,
+    userAuthData.id,
+  ]);
 
   return (
     <ReviewContainer>

@@ -7,7 +7,7 @@ import { RequestError } from "@/App/store/storeTypes";
 import { api } from "@/utils/api/api";
 
 interface RequestReviews {
-  bookId: string | undefined;
+  bookId: string;
   pageNumber: number;
   pageSize: number;
 }

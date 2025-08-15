@@ -54,7 +54,7 @@ export const BookItem = () => {
 
   useEffect(() => {
     dispatch(fetchItemBook({ id: bookId }));
-  }, []);
+  }, [bookId]);
 
   if (errorBooks) {
     return <ErrorComponent title={errorBooks} />;

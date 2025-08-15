@@ -10,10 +10,6 @@ import {
   createReview,
   RequestReview,
 } from "@/App/store/reducers/reviewsReducer/services/createReview";
-import {
-  fetchUserReview,
-  RequestUserReview,
-} from "@/App/store/reducers/reviewsReducer/services/fetchUserReview";
 import { useAppDispatch, useAppSelector } from "@/App/store/storeHooks";
 import { FetchStatus } from "@/App/store/storeTypes";
 import {
@@ -55,27 +51,17 @@ export const CreateReview = () => {
       dispatch(createReview(requestCreateUserReview));
       setIsVisibleNewReview(false);
     }
-  }, [comment]);
+  }, [book.id, comment, dispatch, userAuthData.id]);
 
   const deleteReviewHandler = () => {
     dispatch(clearUserReview());
   };
 
   useEffect(() => {
-    if (userAuthData.id) {
-      const requestUserReview: RequestUserReview = {
-        bookId: book.id,
-        personId: userAuthData.id.toString(),
-      };
-      dispatch(fetchUserReview(requestUserReview));
-    }
-  }, []);
-
-  useEffect(() => {
     if (loadingUserReview === FetchStatus.SUCCESS) {
       setComment(userReview.comment);
     }
-  }, [userReview]);
+  }, [loadingUserReview, userReview]);
 
   return (
     <CreateReviewWrapper isHover={!isVisibleNewReview}>
