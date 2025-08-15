@@ -1,5 +1,15 @@
-import { JSX } from "react";
+import { Divider, Typography } from "@mui/material";
 
-export const Admin = (): JSX.Element => {
-  return <div>Admin</div>;
+import { AdminWrapper } from "@/pages/Admin/ui/styles";
+import { AdminPanel } from "@/widgets/ui/AdminPanel";
+
+export const Admin = () => {
+  return (
+    <AdminWrapper>
+      <Typography variant={"h6"}>Панель администратора</Typography>
+      <Divider color={"divider"} />
+      <Divider flexItem orientation="horizontal" />
+      <AdminPanel />
+    </AdminWrapper>
+  );
 };
