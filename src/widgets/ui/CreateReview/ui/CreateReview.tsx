@@ -53,7 +53,6 @@ export const CreateReview = () => {
           personId: userAuthData.id,
           comment: comment,
         };
-        console.log(requestCreateUserReview);
         dispatch(createReview(requestCreateUserReview));
         setIsVisibleNewReview(false);
       }

@@ -9,7 +9,7 @@ interface RatingProps {
 }
 
 export const Rating = (props: RatingProps) => {
-  const { rating = 3 } = props;
+  const { rating = 0 } = props;
 
   const starList = Array.from({ length: countStar }, (_, i) => i + 1).map(
     el => {
