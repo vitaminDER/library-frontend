@@ -41,6 +41,7 @@ export const CreateReview = () => {
     setComment("");
     setIsVisibleNewReview(false);
   };
+
   const handleCreateReview = useCallback(() => {
     if (userAuthData.id) {
       const requestCreateUserReview: RequestReview = {
@@ -61,7 +62,7 @@ export const CreateReview = () => {
     if (loadingUserReview === FetchStatus.SUCCESS) {
       setComment(userReview.comment);
     }
-  }, [loadingUserReview, userReview]);
+  }, [loadingUserReview, userReview, book]);
 
   return (
     <CreateReviewWrapper isHover={!isVisibleNewReview}>
