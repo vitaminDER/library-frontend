@@ -28,7 +28,7 @@ export const CreateReview = () => {
   const dispatch = useAppDispatch();
   const { book } = useAppSelector(getItemBookSelector);
   const { id } = useParams();
-  const bookId = id?.slice(1);
+  const bookId = id ? id.slice(1) : "";
   const { userReview, loadingUserReview } = useAppSelector(getReviews);
   const [isVisibleNewReview, setIsVisibleNewReview] = useState(false);
   const [comment, setComment] = useState("");
@@ -49,7 +49,7 @@ export const CreateReview = () => {
     if (userAuthData.id) {
       if (bookId) {
         const requestCreateUserReview: RequestReview = {
-          bookId: book.id,
+          bookId: bookId,
           personId: userAuthData.id,
           comment: comment,
         };
@@ -58,7 +58,7 @@ export const CreateReview = () => {
         setIsVisibleNewReview(false);
       }
     }
-  }, [book.id, comment, dispatch, userAuthData.id]);
+  }, [bookId, comment, dispatch, userAuthData.id]);
 
   const deleteReviewHandler = () => {
     dispatch(clearUserReview());
