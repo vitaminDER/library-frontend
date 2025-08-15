@@ -101,6 +101,7 @@ const reviewsSlice = createSlice({
         state.loadingUserReview = FetchStatus.SUCCESS;
       })
       .addCase(fetchUserReview.rejected, (state, action) => {
+        state.userReview = initialState.userReview;
         state.errorUserReview = action.payload?.message?.toUpperCase();
         state.loadingUserReview = FetchStatus.REJECTED;
       });
