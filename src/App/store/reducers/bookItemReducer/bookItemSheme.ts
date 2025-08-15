@@ -9,7 +9,7 @@ export interface BookItem {
   id: string;
   title: string;
   author: string;
-  year: number;
+  year: "";
   rating: number;
   description: string;
   genre: Genre[];

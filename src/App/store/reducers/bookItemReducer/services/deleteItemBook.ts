@@ -2,9 +2,9 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import type { AxiosError } from "axios";
 
 import { QUERY } from "@/App/store/backend/constants";
+import { getTokenFromCookie } from "@/App/store/reducers/authReducer/utils";
 import { RequestError } from "@/App/store/storeTypes";
 import { api } from "@/utils/api/api";
-import {getTokenFromCookie} from "@/App/store/reducers/authReducer/utils";
 
 export const deleteItemBook = createAsyncThunk<
   void,
@@ -14,10 +14,12 @@ export const deleteItemBook = createAsyncThunk<
   }
 >("deleteItemBook", async (id, thunkAPI) => {
   try {
-    await api.delete(`${QUERY.deleteItemBookUrl}/${id}`, {headers: {
+    await api.delete(`${QUERY.deleteItemBookUrl}/${id}`, {
+      headers: {
         Authorization: `Bearer ${getTokenFromCookie()}`,
-        Accept: 'application/json'
-      }});
+        Accept: "application/json",
+      },
+    });
     return;
   } catch (e) {
     const error = e as AxiosError<RequestError>;

@@ -2,6 +2,7 @@ import { Divider, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 
 import { useAuth } from "@/App/store/hooks/useAuth";
+import { authSliceAction } from "@/App/store/reducers/authReducer/authSlice";
 import { fetchProfile } from "@/App/store/reducers/profileReducer/services/fetchProfile";
 import { useAppDispatch } from "@/App/store/storeHooks";
 import { FemaleAvatar } from "@/assets/FemaleAvatar";
@@ -15,7 +16,6 @@ import {
   UserProfileRightContainer,
   UserProfileWrapper,
 } from "@/widgets/ui/UserProfile/ui/styles";
-import {authSliceAction} from "@/App/store/reducers/authReducer/authSlice";
 // import {getProfile} from "@/App/store/reducers/profileReducer/selectors.ts";
 
 const profile = {

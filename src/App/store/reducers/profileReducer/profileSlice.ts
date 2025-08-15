@@ -1,7 +1,4 @@
-import {
-  createSlice,
-  PayloadAction,
-} from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 import { ProfileSchema } from "@/App/store/reducers/profileReducer/profileSchema";
 import {

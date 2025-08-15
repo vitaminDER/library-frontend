@@ -20,7 +20,7 @@ export const fetchReviews = createAsyncThunk<
   }
 >("fetchReviews", async (params, thunkAPI) => {
   try {
-    const response = await api.get<Reviews>(QUERY.getReviewsUrl, { params }, );
+    const response = await api.get<Reviews>(QUERY.getReviewsUrl, { params });
     return response.data;
   } catch (e) {
     const error = e as AxiosError<RequestError>;

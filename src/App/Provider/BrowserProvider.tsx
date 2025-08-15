@@ -27,8 +27,7 @@ export const BrowserProvider = () => {
     >
       <Routes>
         <Route path={PATH.BASE} element={<AppContent />}>
-          <Route index path={PATH.BASE} element={<Books />}
-          />
+          <Route index path={PATH.BASE} element={<Books />} />
           <Route
             path={PATH.BOOKITEM}
             element={

@@ -4,6 +4,7 @@ import { Button, IconButton, InputAdornment, TextField } from "@mui/material";
 import { ChangeEvent, ReactNode, useCallback, useState } from "react";
 import { Link, Navigate } from "react-router-dom";
 
+import { useAuth } from "@/App/store/hooks/useAuth";
 import {
   fetchAuth,
   RequestAuth,
@@ -12,7 +13,6 @@ import { useAppDispatch } from "@/App/store/storeHooks";
 import { PATH } from "@/constants";
 import { AuthWrapper, FormContainer } from "@/pages/Auth/ui/styled";
 import { FormStates } from "@/pages/Registration/ui/interface";
-import {useAuth} from "@/App/store/hooks/useAuth";
 
 export const Auth = () => {
   const { isAuth } = useAuth();

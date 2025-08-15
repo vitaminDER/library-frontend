@@ -4,6 +4,8 @@ import { Link, useNavigate } from "react-router-dom";
 
 import { useAuth } from "@/App/store/hooks/useAuth";
 import { UserRole } from "@/App/store/reducers/authReducer/authSchema";
+import { authSliceAction } from "@/App/store/reducers/authReducer/authSlice";
+import { useAppDispatch } from "@/App/store/storeHooks";
 import { BooksSvg } from "@/assets/BooksSvg";
 import { PATH } from "@/constants";
 
@@ -13,8 +15,6 @@ import {
   NavWrapper,
   RightContainer,
 } from "./styles";
-import {useAppDispatch} from "@/App/store/storeHooks";
-import {authSliceAction} from "@/App/store/reducers/authReducer/authSlice";
 
 export const Nav = (): JSX.Element => {
   const { isAuth, role } = useAuth();
@@ -43,14 +43,14 @@ export const Nav = (): JSX.Element => {
             variant="outlined"
             size="small"
             onClick={() => {
-              if(isAuth){
-                dispatch(authSliceAction.setLogout())
-              }else {
-              navigate(PATH.AUTH);
+              if (isAuth) {
+                dispatch(authSliceAction.setLogout());
+              } else {
+                navigate(PATH.AUTH);
               }
             }}
           >
-            {isAuth ? 'Выйти' :'Вход'}
+            {isAuth ? "Выйти" : "Вход"}
           </Button>
           {isAuth && <Link to={PATH.PROFILE}>Профиль</Link>}
           {isAuth && role === UserRole.ADMIN && (

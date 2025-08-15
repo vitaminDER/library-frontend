@@ -2,9 +2,9 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import type { AxiosError } from "axios";
 
 import { QUERY } from "@/App/store/backend/constants";
+import { AuthData } from "@/App/store/reducers/authReducer/authSchema";
 import { RequestError } from "@/App/store/storeTypes";
 import { api } from "@/utils/api/api";
-import {AuthData} from "@/App/store/reducers/authReducer/authSchema";
 
 export interface RequestAuth {
   login: string;
@@ -18,7 +18,7 @@ interface ResponseAuth {
 }
 
 export const fetchAuth = createAsyncThunk<
-    AuthData,
+  AuthData,
   RequestAuth,
   {
     rejectValue: RequestError;
