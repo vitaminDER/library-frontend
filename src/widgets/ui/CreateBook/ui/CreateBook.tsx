@@ -89,7 +89,7 @@ export const CreateBook = () => {
           error={!!bookName.error}
           id="bookName"
           label="Название книги"
-          sx={{ width: "300px" }}
+          sx={{ width: "400px" }}
           onChange={(e: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) =>
             handleBookName(e)
           }
@@ -100,7 +100,7 @@ export const CreateBook = () => {
           error={!!bookAuthor.error}
           id="bookAuthor"
           label="Автор книги"
-          sx={{ width: "300px" }}
+          sx={{ width: "400px" }}
           onChange={(e: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) =>
             handleBookAuthor(e)
           }
@@ -125,7 +125,7 @@ export const CreateBook = () => {
           id="bookDescription"
           label="Описание"
           maxRows={4}
-          sx={{ width: "835px" }}
+          sx={{ width: "820px" }}
           onChange={(e: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) =>
             handleBookDescription(e)
           }
