@@ -5,12 +5,12 @@ import { useParams } from "react-router-dom";
 
 import { useAuth } from "@/App/store/hooks/useAuth";
 import { getItemBookSelector } from "@/App/store/reducers/bookItemReducer/selectors";
-import { clearUserReview } from "@/App/store/reducers/reviewsReducer/reviewsSlice";
 import { getReviews } from "@/App/store/reducers/reviewsReducer/selectors";
 import {
   createReview,
   RequestReview,
 } from "@/App/store/reducers/reviewsReducer/services/createReview";
+import { deleteUserReview } from "@/App/store/reducers/reviewsReducer/services/deleteUserReview";
 import { useAppDispatch, useAppSelector } from "@/App/store/storeHooks";
 import { FetchStatus } from "@/App/store/storeTypes";
 import {
@@ -60,7 +60,8 @@ export const CreateReview = () => {
   }, [bookId, comment, dispatch, userAuthData.id]);
 
   const deleteReviewHandler = () => {
-    dispatch(clearUserReview());
+    dispatch(deleteUserReview(bookId));
+    // dispatch(clearUserReview());
   };
 
   useEffect(() => {
@@ -91,17 +92,17 @@ export const CreateReview = () => {
             <Button
               variant="outlined"
               size={"large"}
-              disabled={comment.length < 120 || comment.length > 3000}
-              onClick={handleCreateReview}
+              onClick={deleteReviewHandler}
             >
-              Отправить
+              Удалить отзыв
             </Button>
             <Button
               variant="outlined"
               size={"large"}
-              onClick={deleteReviewHandler}
+              disabled={comment.length < 120 || comment.length > 3000}
+              onClick={handleCreateReview}
             >
-              Удалить отзыв
+              Отправить
             </Button>
           </ButtonBox>
         </CreateReviewFormContainer>

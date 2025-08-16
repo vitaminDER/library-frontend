@@ -83,7 +83,7 @@ const reviewsSlice = createSlice({
         state.errorUserReview = null;
         state.loadingUserReview = FetchStatus.PENDING;
       })
-      .addCase(deleteUserReview.fulfilled, (state, action) => {
+      .addCase(deleteUserReview.fulfilled, state => {
         state.userReview = initialState.userReview;
         state.loadingUserReview = FetchStatus.SUCCESS;
       })
