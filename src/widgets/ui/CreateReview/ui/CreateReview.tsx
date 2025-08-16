@@ -103,7 +103,7 @@ export const CreateReview = () => {
               disabled={
                 comment.length < 120 ||
                 comment.length > 3000 ||
-                !userReview.comment
+                !!userReview.comment
               }
               onClick={handleCreateReview}
             >
