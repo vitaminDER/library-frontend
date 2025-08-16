@@ -17,6 +17,7 @@ export const AdminPanel = () => {
   return (
     <Box
       sx={{
+        width: "100%",
         flexGrow: 1,
         display: "flex",
         height: "70vh",

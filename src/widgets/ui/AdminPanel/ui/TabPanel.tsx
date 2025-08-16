@@ -1,5 +1,4 @@
 import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
 import { ReactNode } from "react";
 
 interface TabPanelProps {
@@ -18,12 +17,9 @@ export const TabPanel = (props: TabPanelProps) => {
       id={`vertical-tabpanel-${index}`}
       aria-labelledby={`vertical-tab-${index}`}
       {...other}
+      style={{ width: "100%" }}
     >
-      {value === index && (
-        <Box sx={{ p: 3 }}>
-          <Typography>{children}</Typography>
-        </Box>
-      )}
+      {value === index && <Box sx={{ width: "100%", p: 1 }}>{children}</Box>}
     </div>
   );
 };
