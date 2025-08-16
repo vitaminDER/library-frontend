@@ -54,9 +54,9 @@ const initialState: ReviewsScheme = {
     totalPages: 5,
   },
   userReview: {
-    bookId: null,
-    personId: null,
-    reviewId: null,
+    bookId: "",
+    personId: "",
+    reviewId: "",
     comment: "",
     createdDate: "",
   },

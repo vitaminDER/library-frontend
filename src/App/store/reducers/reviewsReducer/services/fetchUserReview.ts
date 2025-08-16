@@ -12,9 +12,9 @@ export interface RequestUserReview {
 }
 
 export interface ResponseUserReview {
-  bookId: number | null;
-  personId: number | null;
-  reviewId: number | null;
+  bookId: string;
+  personId: string;
+  reviewId: string;
   comment: string;
   createdDate: string;
 }

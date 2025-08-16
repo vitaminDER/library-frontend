@@ -60,7 +60,9 @@ export const CreateReview = () => {
   }, [bookId, comment, dispatch, userAuthData.id]);
 
   const deleteReviewHandler = () => {
-    dispatch(deleteUserReview(bookId));
+    if (loadingUserReview === FetchStatus.SUCCESS) {
+      dispatch(deleteUserReview(userReview.reviewId));
+    }
     // dispatch(clearUserReview());
   };
 
