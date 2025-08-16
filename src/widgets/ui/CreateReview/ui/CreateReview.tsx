@@ -63,7 +63,6 @@ export const CreateReview = () => {
     if (loadingUserReview === FetchStatus.SUCCESS) {
       dispatch(deleteUserReview(userReview.reviewId));
     }
-    // dispatch(clearUserReview());
   };
 
   useEffect(() => {
@@ -101,7 +100,11 @@ export const CreateReview = () => {
             <Button
               variant="outlined"
               size={"large"}
-              disabled={comment.length < 120 || comment.length > 3000}
+              disabled={
+                comment.length < 120 ||
+                comment.length > 3000 ||
+                !userReview.comment
+              }
               onClick={handleCreateReview}
             >
               Отправить
