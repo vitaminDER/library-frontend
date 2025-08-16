@@ -79,5 +79,8 @@ export const TextAriaResize = styled.textarea`
 
 export const ButtonBox = styled.div`
   display: flex;
+  flex-direction: row;
+  align-items: center;
   justify-content: flex-end;
+  gap: 20px;
 `;

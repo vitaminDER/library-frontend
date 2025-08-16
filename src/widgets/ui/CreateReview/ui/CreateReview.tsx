@@ -96,8 +96,6 @@ export const CreateReview = () => {
             >
               Отправить
             </Button>
-          </ButtonBox>
-          <ButtonBox>
             <Button
               variant="outlined"
               size={"large"}
@@ -108,7 +106,13 @@ export const CreateReview = () => {
           </ButtonBox>
         </CreateReviewFormContainer>
       ) : (
-        <div onClick={() => setIsVisibleNewReview(true)}>Оставить отзыв</div>
+        <div
+          onClick={() => {
+            setIsVisibleNewReview(true);
+          }}
+        >
+          Оставить отзыв
+        </div>
       )}
     </CreateReviewWrapper>
   );
