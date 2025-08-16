@@ -133,11 +133,11 @@ export const CreateBook = () => {
         <Button
           component="label"
           role={undefined}
-          variant="contained"
+          variant="outlined"
           tabIndex={-1}
           startIcon={<CloudUploadIcon />}
         >
-          Загрузить файл книги
+          Загрузить книгу
           <VisuallyHiddenInput
             multiple
             type="file"
