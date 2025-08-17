@@ -10,4 +10,7 @@ export const QUERY = {
   getUserReviewUrl: "api/review",
   deleteUserReviewUrl: "api/review",
   postReviewUrl: "api/review",
+  // Admin url
+  createNewBookUrl: "api/admin/book",
+  getGenreUrl: "api/genre",
 };

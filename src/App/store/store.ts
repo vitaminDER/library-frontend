@@ -12,6 +12,7 @@ import {
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 
+import { adminSliceReducer } from "@/App/store/reducers/adminReducer/adminSlice";
 import { authSliceReducer } from "@/App/store/reducers/authReducer/authSlice";
 import { itemBookSliceReducer } from "@/App/store/reducers/bookItemReducer/bookSlice";
 import { booksSliceReducer } from "@/App/store/reducers/booksReducer/booksSlice";
@@ -32,6 +33,7 @@ export const rootReducer = combineReducers({
   authPreference: authSliceReducer,
   userPreference: userPreferenceSliceReducer,
   profile: profileSliceReducer,
+  admin: adminSliceReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

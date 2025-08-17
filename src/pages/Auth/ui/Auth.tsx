@@ -150,8 +150,8 @@ export const Auth = () => {
           Войти
         </Button>
 
-        <div onClick={() => {}}>
-          Если вы еще не зарегистрированы пройдите{" "}
+        <div>
+          Если вы еще не зарегистрированы пройдите
           <Link style={{ color: "blue" }} to={PATH.REGISTRATION}>
             регистрацию
           </Link>

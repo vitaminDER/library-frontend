@@ -1,28 +1,28 @@
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import { Button, TextField } from "@mui/material";
-import React, { ChangeEvent, useState } from "react";
-import styled from "styled-components";
+import React, { ChangeEvent, useMemo, useState } from "react";
 
+import { getGenreSelector } from "@/App/store/reducers/adminReducer/adminSelectors";
+import { useAppSelector } from "@/App/store/storeHooks";
 import { FormStates } from "@/pages/Registration/ui/interface";
+import { VisuallyHiddenInput } from "@/widgets/ui/CreateBook/ui/constants";
 import {
   ButtonBox,
   CreateBookWrapper,
   FormWrapper,
 } from "@/widgets/ui/CreateBook/ui/styles";
+import { MultiSelect } from "@/widgets/ui/MultiSelect";
+import { MultiSelectOption } from "@/widgets/ui/MultiSelect/ui/interface";
 
-const VisuallyHiddenInput = styled("input")({
-  // clip: "rect(0 0 0 0)",
-  clipPath: "inset(50%)",
-  height: 1,
-  overflow: "hidden",
-  position: "absolute",
-  bottom: 0,
-  left: 0,
-  whiteSpace: "nowrap",
-  width: 1,
-});
+const genres: MultiSelectOption[] = [
+  { id: "1", value: "Action" },
+  { id: "2", value: "Horror" },
+  { id: "3", value: "Comedy" },
+];
 
 export const CreateBook = () => {
+  const genres = useAppSelector(getGenreSelector);
+
   const [bookName, setBookName] = useState<FormStates>({
     value: "",
     error: "",
@@ -40,6 +40,17 @@ export const CreateBook = () => {
     value: "",
     error: "",
   });
+  const [imageUrl, setImageUrl] = useState<FormStates>({
+    value: "",
+    error: "",
+  });
+  const [selectedGenreId, setSelectedGenreId] = useState<string[]>([]);
+
+  const optionsGenge: MultiSelectOption[] = useMemo(() => {
+    return genres.map(genre => {
+      return { id: genre.id, value: genre.name };
+    });
+  }, [genres]);
 
   const handleBookName = (
     e: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
@@ -67,6 +78,17 @@ export const CreateBook = () => {
         error: "",
       });
     }
+  };
+  const handleImageUrl = (
+    e: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
+  ) => {
+    const valueImageUrl: string = e.target.value;
+
+    setImageUrl({
+      ...imageUrl,
+      value: valueImageUrl,
+      error: "",
+    });
   };
 
   const handleBookDescription = (
@@ -117,6 +139,27 @@ export const CreateBook = () => {
         />
       </FormWrapper>
       <FormWrapper>
+        <MultiSelect
+          options={optionsGenge}
+          label={"Жанры"}
+          selectedIds={selectedGenreId}
+          setSelectedIds={setSelectedGenreId}
+        />
+
+        <TextField
+          value={imageUrl.value}
+          helperText={imageUrl.error}
+          error={!!imageUrl.error}
+          id="imageUrl"
+          label="Ссылка на картинку обложки книги"
+          maxRows={4}
+          sx={{ width: "716px" }}
+          onChange={(e: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) =>
+            handleImageUrl(e)
+          }
+        />
+      </FormWrapper>
+      <FormWrapper>
         <TextField
           multiline
           value={bookDescription.value}
@@ -125,11 +168,12 @@ export const CreateBook = () => {
           id="bookDescription"
           label="Описание"
           maxRows={4}
-          sx={{ width: "820px" }}
+          sx={{ width: "716px" }}
           onChange={(e: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) =>
             handleBookDescription(e)
           }
         />
+
         <Button
           component="label"
           role={undefined}

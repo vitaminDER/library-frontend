@@ -5,19 +5,26 @@ import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import Box from "@mui/material/Box";
 import Tab from "@mui/material/Tab";
 import Tabs from "@mui/material/Tabs";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
+import { fetchGenres } from "@/App/store/reducers/adminReducer/services/fetchGenres";
+import { useAppDispatch } from "@/App/store/storeHooks";
 import { TabButtonContainer } from "@/widgets/ui/AdminPanel/ui/styles";
 import { TabPanel } from "@/widgets/ui/AdminPanel/ui/TabPanel";
 import { a11yProps } from "@/widgets/ui/AdminPanel/utils/utils";
 import { CreateBook } from "@/widgets/ui/CreateBook/ui/CreateBook";
 
 export const AdminPanel = () => {
+  const dispatch = useAppDispatch();
   const [value, setValue] = useState(0);
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
   };
+
+  useEffect(() => {
+    dispatch(fetchGenres());
+  }, [dispatch]);
 
   return (
     <Box
