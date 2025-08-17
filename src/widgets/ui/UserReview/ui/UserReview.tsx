@@ -93,6 +93,7 @@ export const UserReview = () => {
             <Button
               variant="outlined"
               size={"large"}
+              disabled={!userReview.comment}
               onClick={deleteReviewHandler}
             >
               Удалить отзыв
