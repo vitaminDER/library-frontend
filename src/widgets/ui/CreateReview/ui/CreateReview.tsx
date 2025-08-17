@@ -101,7 +101,7 @@ export const CreateReview = () => {
               variant="outlined"
               size={"large"}
               disabled={
-                comment.length < 120 ||
+                comment.length < 10 ||
                 comment.length > 3000 ||
                 !!userReview.comment
               }
