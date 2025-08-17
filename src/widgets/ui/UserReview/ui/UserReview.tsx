@@ -6,11 +6,9 @@ import { useParams } from "react-router-dom";
 import { useAuth } from "@/App/store/hooks/useAuth";
 import { getItemBookSelector } from "@/App/store/reducers/bookItemReducer/selectors";
 import { getReviews } from "@/App/store/reducers/reviewsReducer/selectors";
-import {
-  createReview,
-  RequestReview,
-} from "@/App/store/reducers/reviewsReducer/services/createReview";
+import { createReview } from "@/App/store/reducers/reviewsReducer/services/createReview";
 import { deleteUserReview } from "@/App/store/reducers/reviewsReducer/services/deleteUserReview";
+import { updateUserReview } from "@/App/store/reducers/reviewsReducer/services/updateUserReview";
 import { useAppDispatch, useAppSelector } from "@/App/store/storeHooks";
 import { FetchStatus } from "@/App/store/storeTypes";
 import {
@@ -18,6 +16,7 @@ import {
   CreateReviewFormContainer,
   CreateReviewWrapper,
   ReviewHeader,
+  ReviewHeaderButton,
   TextAriaBox,
   TextAriaCount,
   TextAriaResize,
@@ -28,7 +27,7 @@ export const UserReview = () => {
   const dispatch = useAppDispatch();
   const { book } = useAppSelector(getItemBookSelector);
   const { id } = useParams();
-  const bookId = id ? id.slice(1) : "";
+  const bookId: string = id ? id.slice(1) : "";
   const { userReview, loadingUserReview } = useAppSelector(getReviews);
   const [isVisibleNewReview, setIsVisibleNewReview] = useState(false);
   const [comment, setComment] = useState("");
@@ -47,17 +46,21 @@ export const UserReview = () => {
 
   const handleCreateReview = useCallback(() => {
     if (userAuthData.id) {
-      if (bookId) {
-        const requestCreateUserReview: RequestReview = {
-          bookId: bookId,
-          personId: userAuthData.id,
-          comment: comment,
-        };
+      const requestCreateUserReview = {
+        ...(userReview.reviewId && { reviewId: userReview.reviewId }),
+        bookId: bookId,
+        personId: userAuthData.id,
+        comment: comment,
+      };
+      if (userReview.reviewId) {
+        dispatch(updateUserReview(requestCreateUserReview));
+      } else {
         dispatch(createReview(requestCreateUserReview));
-        setIsVisibleNewReview(false);
       }
+
+      setIsVisibleNewReview(false);
     }
-  }, [bookId, comment, dispatch, userAuthData.id]);
+  }, [bookId, comment, dispatch, userAuthData.id, userReview.reviewId]);
 
   const deleteReviewHandler = () => {
     if (loadingUserReview === FetchStatus.SUCCESS) {
@@ -113,13 +116,13 @@ export const UserReview = () => {
           </ButtonBox>
         </CreateReviewFormContainer>
       ) : (
-        <div
+        <ReviewHeaderButton
           onClick={() => {
             setIsVisibleNewReview(true);
           }}
         >
           Оставить отзыв
-        </div>
+        </ReviewHeaderButton>
       )}
     </CreateReviewWrapper>
   );

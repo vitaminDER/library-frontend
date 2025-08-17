@@ -2,12 +2,10 @@ import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { CircularProgress } from "@mui/material";
 import Pagination from "@mui/material/Pagination";
-import { ChangeEvent, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { ChangeEvent, useState } from "react";
 
 import { setPagination } from "@/App/store/reducers/reviewsReducer/reviewsSlice";
 import { getReviews } from "@/App/store/reducers/reviewsReducer/selectors";
-import { fetchReviews } from "@/App/store/reducers/reviewsReducer/services/fetchReviews";
 import { useAppDispatch, useAppSelector } from "@/App/store/storeHooks";
 import { FetchStatus } from "@/App/store/storeTypes";
 import { Review } from "@/widgets/ui/Review";
@@ -19,8 +17,6 @@ import {
 } from "./styles";
 
 export const ReviewAllUsers = () => {
-  const { id } = useParams();
-  const bookId = id?.slice(1);
   const dispatch = useAppDispatch();
   const { reviews, loadingReviews } = useAppSelector(getReviews);
   const [isVisible, setIsVisible] = useState(false);
@@ -33,17 +29,6 @@ export const ReviewAllUsers = () => {
   ) => {
     dispatch(setPagination(value));
   };
-
-  useEffect(() => {
-    if (bookId) {
-      const requestReviews = {
-        bookId: bookId,
-        pageNumber: reviews.pageNumber,
-        pageSize: reviews.pageSize,
-      };
-      dispatch(fetchReviews(requestReviews));
-    }
-  }, [bookId, reviews.pageNumber, isVisible, reviews.pageSize, dispatch]);
 
   return (
     <>

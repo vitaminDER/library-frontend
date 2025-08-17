@@ -2,15 +2,23 @@ export const QUERY = {
   getBooksUrl: "api/book",
   getItemBookUrl: "api/book/info",
   getReviewsUrl: "api/book/review",
-  deleteItemBookUrl: "api/admin/book",
-  getProfileUrl: "api/profile",
-  postAuthUrl: "api/auth/signin",
+
+  // Registration/authorization
   getAuthMeUrl: "api/auth/me",
   postRegistrationUrl: "api/auth/signup",
+  postAuthUrl: "api/auth/signin",
+
+  // Reviews
   getUserReviewUrl: "api/review",
-  deleteUserReviewUrl: "api/review",
   postReviewUrl: "api/review",
+  putUserReviewUrl: "api/review",
+  deleteUserReviewUrl: "api/review",
+
+  //Profile
+  getProfileUrl: "api/profile",
+
   // Admin url
   createNewBookUrl: "api/admin/book",
+  deleteItemBookUrl: "api/admin/book",
   getGenreUrl: "api/genre",
 };

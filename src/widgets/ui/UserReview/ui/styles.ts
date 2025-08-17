@@ -25,6 +25,7 @@ export const ReviewHeader = styled.div`
   align-items: center;
   justify-content: space-between;
 `;
+export const ReviewHeaderButton = styled.div``;
 
 export const CreateReviewFormContainer = styled.div`
   display: flex;

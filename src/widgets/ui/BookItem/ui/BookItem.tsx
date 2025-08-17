@@ -10,6 +10,8 @@ import { getItemBookSelector } from "@/App/store/reducers/bookItemReducer/select
 import { deleteItemBook } from "@/App/store/reducers/bookItemReducer/services/deleteItemBook";
 import { fetchItemBook } from "@/App/store/reducers/bookItemReducer/services/fetchItemBook";
 import { fetchBooks } from "@/App/store/reducers/booksReducer/services";
+import { getReviews } from "@/App/store/reducers/reviewsReducer/selectors";
+import { fetchReviews } from "@/App/store/reducers/reviewsReducer/services/fetchReviews";
 import {
   fetchUserReview,
   RequestUserReview,
@@ -38,9 +40,10 @@ export const BookItem = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
+  const { reviews } = useAppSelector(getReviews);
   const { book, errorBooks, loadingBooks } =
     useAppSelector(getItemBookSelector);
-  const bookId = id && id.slice(1);
+  const bookId: string = id ? id.slice(1) : "";
   const year = book.year && `${book.year} г.`;
 
   const genreList = useMemo(() => {
@@ -65,6 +68,13 @@ export const BookItem = () => {
 
   useEffect(() => {
     dispatch(fetchItemBook({ id: bookId }));
+    const requestReviews = {
+      bookId: bookId,
+      pageNumber: reviews.pageNumber,
+      pageSize: reviews.pageSize,
+    };
+    dispatch(fetchReviews(requestReviews));
+
     if (userAuthData.id) {
       const requestUserReview: RequestUserReview = {
         bookId: bookId,

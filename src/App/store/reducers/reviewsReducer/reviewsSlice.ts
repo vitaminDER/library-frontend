@@ -5,6 +5,7 @@ import { createReview } from "@/App/store/reducers/reviewsReducer/services/creat
 import { deleteUserReview } from "@/App/store/reducers/reviewsReducer/services/deleteUserReview";
 import { fetchReviews } from "@/App/store/reducers/reviewsReducer/services/fetchReviews";
 import { fetchUserReview } from "@/App/store/reducers/reviewsReducer/services/fetchUserReview";
+import { updateUserReview } from "@/App/store/reducers/reviewsReducer/services/updateUserReview";
 import { FetchStatus } from "@/App/store/storeTypes";
 
 // const reviewMock = {
@@ -79,19 +80,6 @@ const reviewsSlice = createSlice({
   },
   extraReducers: builder => {
     builder
-      .addCase(deleteUserReview.pending, state => {
-        state.errorUserReview = null;
-        state.loadingUserReview = FetchStatus.PENDING;
-      })
-      .addCase(deleteUserReview.fulfilled, state => {
-        state.userReview = initialState.userReview;
-        state.loadingUserReview = FetchStatus.SUCCESS;
-      })
-      .addCase(deleteUserReview.rejected, (state, action) => {
-        state.errorUserReview = action.payload?.message?.toUpperCase();
-        state.loadingUserReview = FetchStatus.REJECTED;
-      });
-    builder
       .addCase(fetchUserReview.pending, state => {
         state.errorUserReview = null;
         state.loadingUserReview = FetchStatus.PENDING;
@@ -114,6 +102,32 @@ const reviewsSlice = createSlice({
         state.loadingUserReview = FetchStatus.SUCCESS;
       })
       .addCase(createReview.rejected, (state, action) => {
+        state.errorUserReview = action.payload?.message?.toUpperCase();
+        state.loadingUserReview = FetchStatus.REJECTED;
+      });
+    builder
+      .addCase(updateUserReview.pending, state => {
+        state.errorUserReview = null;
+        state.loadingUserReview = FetchStatus.PENDING;
+      })
+      .addCase(updateUserReview.fulfilled, (state, action) => {
+        state.userReview = action.payload;
+        state.loadingUserReview = FetchStatus.SUCCESS;
+      })
+      .addCase(updateUserReview.rejected, (state, action) => {
+        state.errorUserReview = action.payload?.message?.toUpperCase();
+        state.loadingUserReview = FetchStatus.REJECTED;
+      });
+    builder
+      .addCase(deleteUserReview.pending, state => {
+        state.errorUserReview = null;
+        state.loadingUserReview = FetchStatus.PENDING;
+      })
+      .addCase(deleteUserReview.fulfilled, state => {
+        state.userReview = initialState.userReview;
+        state.loadingUserReview = FetchStatus.SUCCESS;
+      })
+      .addCase(deleteUserReview.rejected, (state, action) => {
         state.errorUserReview = action.payload?.message?.toUpperCase();
         state.loadingUserReview = FetchStatus.REJECTED;
       });
