@@ -21,9 +21,9 @@ import {
   TextAriaBox,
   TextAriaCount,
   TextAriaResize,
-} from "@/widgets/ui/CreateReview/ui/styles";
+} from "@/widgets/ui/UserReview/ui/styles";
 
-export const CreateReview = () => {
+export const UserReview = () => {
   const userAuthData = useAuth();
   const dispatch = useAppDispatch();
   const { book } = useAppSelector(getItemBookSelector);

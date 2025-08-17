@@ -7,7 +7,7 @@ import { RequestError } from "@/App/store/storeTypes";
 import { api } from "@/utils/api/api";
 
 export interface RequestUserReview {
-  bookId: string;
+  bookId: string | undefined;
   personId: string;
 }
 

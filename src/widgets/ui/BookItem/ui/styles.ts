@@ -37,3 +37,10 @@ export const ButtonBlock = styled.div`
 export const ButtonContainer = styled.div`
   width: 100%;
 `;
+export const ReviewContainer = styled.div`
+  width: 900px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 8px;
+  background-color: #eddfd32e;
+`;

@@ -10,13 +10,18 @@ import { getItemBookSelector } from "@/App/store/reducers/bookItemReducer/select
 import { deleteItemBook } from "@/App/store/reducers/bookItemReducer/services/deleteItemBook";
 import { fetchItemBook } from "@/App/store/reducers/bookItemReducer/services/fetchItemBook";
 import { fetchBooks } from "@/App/store/reducers/booksReducer/services";
+import {
+  fetchUserReview,
+  RequestUserReview,
+} from "@/App/store/reducers/reviewsReducer/services/fetchUserReview";
 import { useAppDispatch, useAppSelector } from "@/App/store/storeHooks";
 import { FetchStatus } from "@/App/store/storeTypes";
 import { PATH } from "@/constants";
-import { Accordion } from "@/widgets/ui/Accordion";
 import { BookImage } from "@/widgets/ui/BookImage";
 import { ErrorComponent } from "@/widgets/ui/ErrorComponent";
 import { Rating } from "@/widgets/ui/Rating";
+import { ReviewAllUsers } from "@/widgets/ui/ReviewAllUsers";
+import { UserReview } from "@/widgets/ui/UserReview";
 
 import {
   ButtonBlock,
@@ -25,10 +30,11 @@ import {
   InfoBookContainer,
   InfoBookWrapper,
   LinkBox,
+  ReviewContainer,
 } from "./styles";
 
 export const BookItem = () => {
-  const authUserData = useAuth();
+  const userAuthData = useAuth();
   const { id } = useParams();
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
@@ -59,7 +65,14 @@ export const BookItem = () => {
 
   useEffect(() => {
     dispatch(fetchItemBook({ id: bookId }));
-  }, [bookId, dispatch]);
+    if (userAuthData.id) {
+      const requestUserReview: RequestUserReview = {
+        bookId: bookId,
+        personId: userAuthData.id.toString(),
+      };
+      dispatch(fetchUserReview(requestUserReview));
+    }
+  }, []);
 
   if (errorBooks) {
     return <ErrorComponent title={errorBooks} />;
@@ -95,7 +108,7 @@ export const BookItem = () => {
         </InfoBook>
       </InfoBookContainer>
       <ButtonBlock>
-        {authUserData.isAuth && authUserData.role === UserRole.ADMIN ? (
+        {userAuthData.isAuth && userAuthData.role === UserRole.ADMIN ? (
           <ButtonContainer>
             <Button variant="outlined" onClick={deleteHandler}>
               Удалить
@@ -108,7 +121,10 @@ export const BookItem = () => {
           </Button>
         </ButtonContainer>
       </ButtonBlock>
-      <Accordion />
+      <ReviewContainer>
+        {userAuthData.isAuth && <UserReview />}
+        <ReviewAllUsers />
+      </ReviewContainer>
     </InfoBookWrapper>
   );
 };
