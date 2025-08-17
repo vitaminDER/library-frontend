@@ -2,6 +2,7 @@ import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import { Button, TextField } from "@mui/material";
 import React, { ChangeEvent, useMemo, useState } from "react";
 
+import { GenreName } from "@/App/store/reducers/adminReducer/adminSchema";
 import { getGenreSelector } from "@/App/store/reducers/adminReducer/adminSelectors";
 import { useAppSelector } from "@/App/store/storeHooks";
 import { FormStates } from "@/pages/Registration/ui/interface";
@@ -48,7 +49,7 @@ export const CreateBook = () => {
 
   const optionsGenge: MultiSelectOption[] = useMemo(() => {
     return genres.map(genre => {
-      return { id: genre.id, value: genre.name };
+      return { id: genre.id, value: GenreName[genre.name] };
     });
   }, [genres]);
 

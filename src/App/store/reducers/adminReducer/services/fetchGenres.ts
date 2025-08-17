@@ -2,12 +2,13 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import type { AxiosError } from "axios";
 
 import { QUERY } from "@/App/store/backend/constants";
+import { GenreKey } from "@/App/store/reducers/adminReducer/adminSchema";
 import { RequestError } from "@/App/store/storeTypes";
 import { api } from "@/utils/api/api";
 
 export interface ResponseGenre {
   id: string;
-  name: string;
+  name: GenreKey;
 }
 
 export const fetchGenres = createAsyncThunk<
