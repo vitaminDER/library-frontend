@@ -41,7 +41,7 @@ export const BookItem = () => {
     const isLast = index === book?.genre?.length - 1 ? "." : ", ";
     return (
       <span key={el.id}>
-        {GenreName[el.name]}
+        {GenreName[el.name] as string}
         {isLast}
       </span>
     );

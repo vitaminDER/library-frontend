@@ -1,3 +1,4 @@
+import { ResponseGenre } from "@/App/store/reducers/adminReducer/services/fetchGenres";
 import { FetchStatus, Nullable } from "@/App/store/storeTypes";
 
 export interface Genre {
@@ -12,7 +13,7 @@ export interface BookItem {
   year: "";
   rating: number;
   description: string;
-  genre: Genre[];
+  genre: ResponseGenre[];
   image: string;
 }
 
