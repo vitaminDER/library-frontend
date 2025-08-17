@@ -2,11 +2,17 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import type { AxiosError } from "axios";
 
 import { QUERY } from "@/App/store/backend/constants";
+import { getTokenFromCookie } from "@/App/store/reducers/authReducer/utils";
 import { RequestError } from "@/App/store/storeTypes";
 import { api } from "@/utils/api/api";
 
 export interface RequestCreateNewBook {
   bookName: string;
+  authorName: string;
+  year: string;
+  genre: string[];
+  imageUrl: string;
+  description: string;
 }
 
 export interface ResponseCreateNewBook {
@@ -19,18 +25,19 @@ export interface ResponseCreateNewBook {
 }
 
 export const createNewBook = createAsyncThunk<
-  ResponseCreateNewBook,
+  void,
   RequestCreateNewBook,
   {
     rejectValue: RequestError;
   }
 >("createNewBook", async (params, thunkAPI) => {
   try {
-    const response = await api.post<ResponseCreateNewBook>(
-      QUERY.createNewBookUrl,
-      params
-    );
-    return response.data;
+    await api.post(QUERY.createNewBookUrl, params, {
+      headers: {
+        Authorization: `Bearer ${getTokenFromCookie()}`,
+        Accept: "application/json",
+      },
+    });
   } catch (e) {
     const error = e as AxiosError<RequestError>;
     if (error.response?.status === 400 && error.response?.data) {
