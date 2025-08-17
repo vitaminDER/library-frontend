@@ -4,7 +4,11 @@ import React, { ChangeEvent, useMemo, useState } from "react";
 
 import { GenreName } from "@/App/store/reducers/adminReducer/adminSchema";
 import { getGenreSelector } from "@/App/store/reducers/adminReducer/adminSelectors";
-import { useAppSelector } from "@/App/store/storeHooks";
+import {
+  createNewBook,
+  RequestCreateNewBook,
+} from "@/App/store/reducers/adminReducer/services/createNewBook";
+import { useAppDispatch, useAppSelector } from "@/App/store/storeHooks";
 import { FormStates } from "@/pages/Registration/ui/interface";
 import { VisuallyHiddenInput } from "@/widgets/ui/CreateBook/ui/constants";
 import {
@@ -15,13 +19,8 @@ import {
 import { MultiSelect } from "@/widgets/ui/MultiSelect";
 import { MultiSelectOption } from "@/widgets/ui/MultiSelect/ui/interface";
 
-const genres: MultiSelectOption[] = [
-  { id: "1", value: "Action" },
-  { id: "2", value: "Horror" },
-  { id: "3", value: "Comedy" },
-];
-
 export const CreateBook = () => {
+  const dispatch = useAppDispatch();
   const genres = useAppSelector(getGenreSelector);
 
   const [bookName, setBookName] = useState<FormStates>({
@@ -32,7 +31,6 @@ export const CreateBook = () => {
     value: "",
     error: "",
   });
-
   const [yearPublication, setYearPublication] = useState<FormStates>({
     value: "",
     error: "",
@@ -80,6 +78,7 @@ export const CreateBook = () => {
       });
     }
   };
+
   const handleImageUrl = (
     e: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
   ) => {
@@ -101,6 +100,18 @@ export const CreateBook = () => {
       value: valueBookDescription,
       error: "",
     });
+  };
+
+  const createBookHandler = () => {
+    const requestNewBook: RequestCreateNewBook = {
+      bookName: bookName.value,
+      authorName: bookAuthor.value,
+      year: yearPublication.value,
+      genre: selectedGenreId,
+      imageUrl: imageUrl.value,
+      description: bookDescription.value,
+    };
+    dispatch(createNewBook(requestNewBook));
   };
 
   return (
@@ -192,7 +203,9 @@ export const CreateBook = () => {
       </FormWrapper>
 
       <ButtonBox>
-        <Button variant="outlined">Добавить книгу</Button>
+        <Button variant="outlined" onClick={createBookHandler}>
+          Добавить книгу
+        </Button>
       </ButtonBox>
     </CreateBookWrapper>
   );

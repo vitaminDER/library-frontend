@@ -26,5 +26,7 @@ export interface AdminSchema {
   data: null;
   genres: ResponseGenre[];
   loadingStatusGenre: FetchStatus;
+  loadingCreateBook: FetchStatus;
   errorGenre: Nullable<string> | undefined;
+  errorCreateBook: Nullable<string> | undefined;
 }

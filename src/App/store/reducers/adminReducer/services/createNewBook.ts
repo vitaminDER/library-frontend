@@ -15,15 +15,6 @@ export interface RequestCreateNewBook {
   description: string;
 }
 
-export interface ResponseCreateNewBook {
-  bookName: string;
-  authorName: string;
-  year: string;
-  genre: string[];
-  imageUrl: string;
-  description: string;
-}
-
 export const createNewBook = createAsyncThunk<
   void,
   RequestCreateNewBook,

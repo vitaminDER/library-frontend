@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 import { AdminSchema } from "@/App/store/reducers/adminReducer/adminSchema";
+import { createNewBook } from "@/App/store/reducers/adminReducer/services/createNewBook";
 import {
   fetchGenres,
   ResponseGenre,
@@ -11,7 +12,9 @@ const initialState: AdminSchema = {
   data: null,
   genres: [],
   loadingStatusGenre: FetchStatus.IDLE,
+  loadingCreateBook: FetchStatus.IDLE,
   errorGenre: null,
+  errorCreateBook: null,
 };
 
 export const adminSlice = createSlice({
@@ -34,6 +37,19 @@ export const adminSlice = createSlice({
       .addCase(fetchGenres.rejected, (state, action) => {
         state.errorGenre = action.payload?.message;
         state.loadingStatusGenre = FetchStatus.REJECTED;
+      });
+    builder
+      .addCase(createNewBook.pending, state => {
+        state.errorCreateBook = null;
+        state.loadingCreateBook = FetchStatus.PENDING;
+      })
+      .addCase(createNewBook.fulfilled, state => {
+        // state.genres = action.payload;
+        state.loadingCreateBook = FetchStatus.SUCCESS;
+      })
+      .addCase(createNewBook.rejected, (state, action) => {
+        state.errorCreateBook = action.payload?.message;
+        state.loadingCreateBook = FetchStatus.REJECTED;
       });
   },
 });
