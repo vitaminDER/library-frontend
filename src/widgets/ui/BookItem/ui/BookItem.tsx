@@ -38,8 +38,8 @@ export const BookItem = () => {
   const year = book.year && `${book.year} г.`;
 
   const genreList = useMemo(() => {
-    return book?.genre.map((el, index) => {
-      const isLast = index === book?.genre.length - 1 ? "." : ", ";
+    return book?.genre?.map((el, index) => {
+      const isLast = index === book?.genre?.length - 1 ? "." : ", ";
       return (
         <span key={el.id}>
           {GenreName[el.name]}
