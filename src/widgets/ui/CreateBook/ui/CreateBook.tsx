@@ -104,11 +104,11 @@ export const CreateBook = () => {
 
   const createBookHandler = () => {
     const requestNewBook: RequestCreateNewBook = {
-      bookName: bookName.value,
-      authorName: bookAuthor.value,
+      title: bookName.value,
+      author: bookAuthor.value,
       year: yearPublication.value,
-      genre: selectedGenreId,
-      imageUrl: imageUrl.value,
+      genreId: selectedGenreId,
+      image: imageUrl.value,
       description: bookDescription.value,
     };
     dispatch(createNewBook(requestNewBook));

@@ -7,11 +7,11 @@ import { RequestError } from "@/App/store/storeTypes";
 import { api } from "@/utils/api/api";
 
 export interface RequestCreateNewBook {
-  bookName: string;
-  authorName: string;
+  title: string;
+  author: string;
   year: string;
-  genre: string[];
-  imageUrl: string;
+  genreId: string[];
+  image: string;
   description: string;
 }
 
