@@ -36,8 +36,8 @@ export const BookItem = () => {
   const bookId = id && id.slice(1);
   const year = book.year && `${book.year} г.`;
 
-  const genreList = book?.genre.map((el, index) => {
-    const isLast = index === book?.genre.length - 1 ? "." : ", ";
+  const genreList = book?.genre?.map((el, index) => {
+    const isLast = index === book?.genre?.length - 1 ? "." : ", ";
     return (
       <span key={el.id}>
         {el.name.toUpperCase()}
