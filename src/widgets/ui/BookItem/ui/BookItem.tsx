@@ -1,6 +1,6 @@
 import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
 import { Button } from "@mui/material";
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 
 import { useAuth } from "@/App/store/hooks/useAuth";
@@ -37,15 +37,17 @@ export const BookItem = () => {
   const bookId = id && id.slice(1);
   const year = book.year && `${book.year} г.`;
 
-  const genreList = book?.genre?.map((el, index) => {
-    const isLast = index === book?.genre?.length - 1 ? "." : ", ";
-    return (
-      <span key={el.id}>
-        {GenreName[el.name] as string}
-        {isLast}
-      </span>
-    );
-  });
+  const genreList = useMemo(() => {
+    return book?.genre.map((el, index) => {
+      const isLast = index === book?.genre.length - 1 ? "." : ", ";
+      return (
+        <span key={el.id}>
+          {GenreName[el.name]}
+          {isLast}
+        </span>
+      );
+    });
+  }, [book?.genre]);
 
   const deleteHandler = () => {
     if (bookId) {
