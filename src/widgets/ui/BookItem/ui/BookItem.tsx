@@ -10,6 +10,7 @@ import { deleteItemBook } from "@/App/store/reducers/bookItemReducer/services/de
 import { fetchItemBook } from "@/App/store/reducers/bookItemReducer/services/fetchItemBook";
 import { fetchBooks } from "@/App/store/reducers/booksReducer/services";
 import { useAppDispatch, useAppSelector } from "@/App/store/storeHooks";
+import { FetchStatus } from "@/App/store/storeTypes";
 import { PATH } from "@/constants";
 import { Accordion } from "@/widgets/ui/Accordion";
 import { BookImage } from "@/widgets/ui/BookImage";
@@ -30,7 +31,8 @@ export const BookItem = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const { book, errorBooks } = useAppSelector(getItemBookSelector);
+  const { book, errorBooks, loadingBooks } =
+    useAppSelector(getItemBookSelector);
   const bookId = id && id.slice(1);
   const year = book.year && `${book.year} г.`;
 
@@ -54,10 +56,14 @@ export const BookItem = () => {
 
   useEffect(() => {
     dispatch(fetchItemBook({ id: bookId }));
-  }, [bookId]);
+  }, [bookId, dispatch]);
 
   if (errorBooks) {
     return <ErrorComponent title={errorBooks} />;
+  }
+
+  if (loadingBooks === FetchStatus.PENDING) {
+    return <div>loading</div>;
   }
 
   return (
