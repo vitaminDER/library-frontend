@@ -51,7 +51,7 @@ export const BookItem = () => {
 
   const deleteHandler = () => {
     if (bookId) {
-      dispatch(deleteItemBook(book.id));
+      dispatch(deleteItemBook(bookId));
       dispatch(fetchBooks());
       navigate(PATH.BASE);
     }
