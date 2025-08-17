@@ -151,7 +151,7 @@ export const Auth = () => {
         </Button>
 
         <div>
-          Если вы еще не зарегистрированы пройдите
+          Если вы еще не зарегистрированы пройдите{" "}
           <Link style={{ color: "blue" }} to={PATH.REGISTRATION}>
             регистрацию
           </Link>
