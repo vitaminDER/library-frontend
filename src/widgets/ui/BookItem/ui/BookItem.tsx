@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 
 import { useAuth } from "@/App/store/hooks/useAuth";
+import { GenreName } from "@/App/store/reducers/adminReducer/adminSchema";
 import { UserRole } from "@/App/store/reducers/authReducer/authSchema";
 import { getItemBookSelector } from "@/App/store/reducers/bookItemReducer/selectors";
 import { deleteItemBook } from "@/App/store/reducers/bookItemReducer/services/deleteItemBook";
@@ -40,7 +41,7 @@ export const BookItem = () => {
     const isLast = index === book?.genre?.length - 1 ? "." : ", ";
     return (
       <span key={el.id}>
-        {el.name.toUpperCase()}
+        {GenreName[el.name]}
         {isLast}
       </span>
     );
