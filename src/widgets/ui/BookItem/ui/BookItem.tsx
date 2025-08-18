@@ -78,11 +78,11 @@ export const BookItem = () => {
     if (userAuthData.id) {
       const requestUserReview: RequestUserReview = {
         bookId: bookId,
-        personId: userAuthData.id.toString(),
+        personId: userAuthData.id,
       };
       dispatch(fetchUserReview(requestUserReview));
     }
-  }, []);
+  }, [bookId, dispatch, reviews.pageNumber, reviews.pageSize, userAuthData.id]);
 
   if (errorBooks) {
     return <ErrorComponent title={errorBooks} />;
