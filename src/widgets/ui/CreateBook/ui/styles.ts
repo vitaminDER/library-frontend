@@ -19,7 +19,8 @@ export const FormWrapper = styled.div`
 `;
 export const ButtonBox = styled.div`
   display: flex;
+  height: 56px;
   flex-direction: row;
   gap: 20px;
-  padding: 5px 20px;
+  //padding: 5px 20px;
 `;

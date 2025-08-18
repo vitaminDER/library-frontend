@@ -204,33 +204,38 @@ export const CreateBook = () => {
           id="bookDescription"
           label="Описание"
           maxRows={4}
-          sx={{ width: "716px" }}
+          sx={{ width: "1036px" }}
           onChange={(e: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) =>
             handleBookDescription(e)
           }
         />
-
-        <Button
-          component="label"
-          role={undefined}
-          variant="outlined"
-          tabIndex={-1}
-          startIcon={<CloudUploadIcon />}
-        >
-          Загрузить книгу
-          <VisuallyHiddenInput
-            multiple
-            type="file"
-            onChange={event => console.log(event.target.files)}
-          />
-        </Button>
+      </FormWrapper>
+      <FormWrapper>
+        <ButtonBox>
+          <Button
+            component="label"
+            role={undefined}
+            variant="contained"
+            tabIndex={-1}
+            startIcon={<CloudUploadIcon />}
+          >
+            Загрузить файл
+            <VisuallyHiddenInput
+              multiple
+              type="file"
+              onChange={event => console.log(event.target.files)}
+            />
+          </Button>
+        </ButtonBox>
       </FormWrapper>
 
-      <ButtonBox>
-        <Button variant="outlined" onClick={createBookHandler}>
-          Добавить книгу
-        </Button>
-      </ButtonBox>
+      <FormWrapper>
+        <ButtonBox>
+          <Button variant="outlined" onClick={createBookHandler}>
+            Добавить книгу
+          </Button>
+        </ButtonBox>
+      </FormWrapper>
     </CreateBookWrapper>
   );
 };
