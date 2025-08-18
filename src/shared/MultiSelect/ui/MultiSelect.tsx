@@ -15,7 +15,7 @@ import { MultiSelectProps } from "@/shared/MultiSelect/ui/interface";
 import { MenuProps } from "@/widgets/ui/CreateBook/ui/constants";
 
 export const MultiSelect = (props: MultiSelectProps) => {
-  const { label, options, selectedIds, setSelectedIds } = props;
+  const { label, options, selectedIds, setSelectedIds, size } = props;
 
   const optionsMultiSelect = options.map(item => (
     <MenuItem key={item.id} value={item.id}>
@@ -62,13 +62,15 @@ export const MultiSelect = (props: MultiSelectProps) => {
   return (
     <div>
       <FormControl sx={{ width: 300 }}>
-        <InputLabel id="multiple-select-label">{label}</InputLabel>
+        <InputLabel id="multiple-select-label" size={size}>
+          {label}
+        </InputLabel>
         <Select
           multiple
           labelId="multiple-select-label"
           id="multiple-select"
           value={selectedIds}
-          input={<OutlinedInput label={label} />}
+          input={<OutlinedInput label={label} size={size} />}
           MenuProps={MenuProps}
           renderValue={selected => renderValueHelper(selected)}
           disabled={options.length === 0}

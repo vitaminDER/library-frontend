@@ -5,7 +5,7 @@ export const AppContentWrapper = styled.div`
   display: flex;
   flex-direction: column;
   position: relative;
-  padding-top: 80px;
+  padding-top: 78px;
 `;
 
 export const LoaderContainer = styled.div`

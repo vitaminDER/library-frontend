@@ -17,7 +17,7 @@ export const TabPanel = (props: TabPanelProps) => {
       id={`vertical-tabpanel-${index}`}
       aria-labelledby={`vertical-tab-${index}`}
       {...other}
-      style={{ width: "100%" }}
+      style={{ width: "80%" }}
     >
       {value === index && <Box sx={{ width: "100%", p: 1 }}>{children}</Box>}
     </div>

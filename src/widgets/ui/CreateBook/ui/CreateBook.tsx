@@ -143,6 +143,7 @@ export const CreateBook = () => {
           id="bookName"
           label="Название книги"
           sx={{ width: "400px" }}
+          size={"small"}
           onChange={(e: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) =>
             handleBookName(e)
           }
@@ -154,6 +155,7 @@ export const CreateBook = () => {
           id="bookAuthor"
           label="Автор книги"
           sx={{ width: "400px" }}
+          size={"small"}
           onChange={(e: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) =>
             handleBookAuthor(e)
           }
@@ -164,6 +166,7 @@ export const CreateBook = () => {
           error={!!yearPublication.error}
           id="yearPublication"
           label="Год издания"
+          size={"small"}
           onChange={(e: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) =>
             handleBookYearPublication(e)
           }
@@ -175,6 +178,7 @@ export const CreateBook = () => {
           label={"Жанры"}
           selectedIds={selectedGenreId}
           setSelectedIds={setSelectedGenreId}
+          size={"small"}
         />
 
         <TextField
@@ -185,6 +189,7 @@ export const CreateBook = () => {
           label="Ссылка на картинку обложки книги"
           maxRows={4}
           sx={{ width: "716px" }}
+          size={"small"}
           onChange={(e: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) =>
             handleImageUrl(e)
           }
@@ -200,6 +205,7 @@ export const CreateBook = () => {
           label="Описание"
           maxRows={4}
           sx={{ width: "1036px" }}
+          size={"small"}
           onChange={(e: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) =>
             handleBookDescription(e)
           }
@@ -213,6 +219,7 @@ export const CreateBook = () => {
             variant="contained"
             tabIndex={-1}
             startIcon={<CloudUploadIcon />}
+            size={"small"}
           >
             Загрузить файл
             <VisuallyHiddenInput
@@ -226,7 +233,7 @@ export const CreateBook = () => {
 
       <FormWrapper>
         <ButtonBox>
-          <Button variant="outlined" onClick={createBookHandler}>
+          <Button variant="outlined" size={"small"} onClick={createBookHandler}>
             Добавить книгу
           </Button>
         </ButtonBox>

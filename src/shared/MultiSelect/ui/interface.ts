@@ -8,4 +8,5 @@ export interface MultiSelectProps {
   options: MultiSelectOption[];
   selectedIds: string[];
   setSelectedIds: (selectedIds: string[]) => void;
+  size?: "small" | "medium" | undefined;
 }

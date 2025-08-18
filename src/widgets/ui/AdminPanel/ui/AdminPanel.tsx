@@ -34,7 +34,7 @@ const adminPanelTabs: AdminPanelTab[] = [
   { tab: "Пользователи", tabPanel: <>Пользователи</>, icon: <PeopleIcon /> },
   {
     tab: "Настройки",
-    tabPanel: <>Настройки</>,
+    tabPanel: <div>Настройки</div>,
     icon: <SettingsOutlinedIcon />,
   },
 ];
@@ -58,7 +58,10 @@ export const AdminPanel = () => {
           </TabButtonContainer>
         }
         {...a11yProps(2)}
-        style={{ alignItems: "flex-start", paddingLeft: "50px" }}
+        style={{
+          alignItems: "flex-start",
+          paddingLeft: "50px",
+        }}
       />
     );
   });
@@ -82,6 +85,7 @@ export const AdminPanel = () => {
         flexGrow: 1,
         display: "flex",
         height: "70vh",
+        boxSizing: "border-box",
       }}
     >
       <Tabs
@@ -92,7 +96,7 @@ export const AdminPanel = () => {
         sx={{
           borderRight: 1,
           borderColor: "divider",
-          width: "300px",
+          width: "260px",
         }}
         onChange={handleChange}
       >

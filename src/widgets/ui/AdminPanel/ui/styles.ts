@@ -14,6 +14,6 @@ export const TabWrapper = styled.div`
   flex-direction: column;
   align-items: flex-start;
   gap: 20px;
-  margin: 20px 0;
+  margin: 10px 0;
   padding: 5px 20px;
 `;
