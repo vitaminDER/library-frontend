@@ -1,5 +1,5 @@
 import { StarSvg } from "@/assets/StarSvg";
-import { COUNT_STAR } from "@/widgets/ui/Rating/ui/constants";
+import { COUNT_STAR } from "@/shared/Rating/ui/constants";
 
 import { StarsContainer } from "./styles";
 

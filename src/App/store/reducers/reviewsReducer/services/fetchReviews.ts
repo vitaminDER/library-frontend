@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import type { AxiosError } from "axios";
 
-import { QUERY } from "@/App/store/backend/constants";
+import { QUERY } from "@/App/store/backend/backendApi";
 import { Reviews } from "@/App/store/reducers/reviewsReducer/reviewsScheme";
 import { RequestError } from "@/App/store/storeTypes";
 import { api } from "@/utils/api/api";

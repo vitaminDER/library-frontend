@@ -9,10 +9,14 @@ import { JSX, SyntheticEvent, useEffect, useState } from "react";
 
 import { fetchGenres } from "@/App/store/reducers/adminReducer/services/fetchGenres";
 import { useAppDispatch } from "@/App/store/storeHooks";
-import { TabButtonContainer } from "@/widgets/ui/AdminPanel/ui/styles";
+import {
+  TabButtonContainer,
+  TabWrapper,
+} from "@/widgets/ui/AdminPanel/ui/styles";
 import { TabPanel } from "@/widgets/ui/AdminPanel/ui/TabPanel";
 import { a11yProps } from "@/widgets/ui/AdminPanel/utils/utils";
 import { CreateBook } from "@/widgets/ui/CreateBook";
+import { ManagementBooks } from "@/widgets/ui/ManagementBooks";
 
 interface AdminPanelTab {
   tab: string;
@@ -21,7 +25,11 @@ interface AdminPanelTab {
 }
 
 const adminPanelTabs: AdminPanelTab[] = [
-  { tab: "Все книги", tabPanel: <>Все книги</>, icon: <ImportContactsIcon /> },
+  {
+    tab: "Все книги",
+    tabPanel: <ManagementBooks />,
+    icon: <ImportContactsIcon />,
+  },
   { tab: "Добавить книгу", tabPanel: <CreateBook />, icon: <NoteAddIcon /> },
   { tab: "Пользователи", tabPanel: <>Пользователи</>, icon: <PeopleIcon /> },
   {
@@ -58,7 +66,7 @@ export const AdminPanel = () => {
   const tabPages = adminPanelTabs.map((adminPanelTab, index) => {
     return (
       <TabPanel key={index} value={value} index={index}>
-        {adminPanelTab.tabPanel}
+        <TabWrapper>{adminPanelTab.tabPanel}</TabWrapper>
       </TabPanel>
     );
   });

@@ -1,4 +1,4 @@
-import { MultiSelect } from "@/widgets/ui/MultiSelect/ui/MultiSelect";
+import { MultiSelect } from "@/shared/MultiSelect/ui/MultiSelect";
 
 import { MultiSelectOption } from "./ui/interface";
 

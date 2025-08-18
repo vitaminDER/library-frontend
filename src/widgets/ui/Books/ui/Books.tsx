@@ -11,9 +11,9 @@ import { fetchBooks } from "@/App/store/reducers/booksReducer/services";
 import { clearUserReview } from "@/App/store/reducers/reviewsReducer/reviewsSlice";
 import { useAppDispatch, useAppSelector } from "@/App/store/storeHooks";
 import { FetchStatus } from "@/App/store/storeTypes";
+import { ErrorComponent } from "@/shared/ErrorComponent";
 import { BookImage } from "@/widgets/ui/BookImage";
-import { BooksListContainer, BooksWrapper } from "@/widgets/ui/Books/ui/styles";
-import { ErrorComponent } from "@/widgets/ui/ErrorComponent";
+import { BooksListContainer } from "@/widgets/ui/Books/ui/styles";
 
 export const Books = () => {
   const dispatch = useAppDispatch();
@@ -52,7 +52,7 @@ export const Books = () => {
   }
 
   return (
-    <BooksWrapper>
+    <>
       {loadingBooks === FetchStatus.PENDING ? (
         <CircularProgress size="30px" />
       ) : (
@@ -70,6 +70,6 @@ export const Books = () => {
           </BooksListContainer>
         </>
       )}
-    </BooksWrapper>
+    </>
   );
 };

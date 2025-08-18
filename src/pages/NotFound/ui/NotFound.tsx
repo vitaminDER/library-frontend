@@ -1,4 +1,4 @@
-import { ErrorComponent } from "@/widgets/ui/ErrorComponent";
+import { ErrorComponent } from "@/shared/ErrorComponent";
 
 import { ContentContainer } from "./styles";
 

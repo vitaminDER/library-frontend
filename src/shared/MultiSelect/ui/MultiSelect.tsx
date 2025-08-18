@@ -10,9 +10,9 @@ import {
 } from "@mui/material";
 import React from "react";
 
+import { SELECT_ALL } from "@/shared/MultiSelect/ui/constants";
+import { MultiSelectProps } from "@/shared/MultiSelect/ui/interface";
 import { MenuProps } from "@/widgets/ui/CreateBook/ui/constants";
-import { SELECT_ALL } from "@/widgets/ui/MultiSelect/ui/constants";
-import { MultiSelectProps } from "@/widgets/ui/MultiSelect/ui/interface";
 
 export const MultiSelect = (props: MultiSelectProps) => {
   const { label, options, selectedIds, setSelectedIds } = props;

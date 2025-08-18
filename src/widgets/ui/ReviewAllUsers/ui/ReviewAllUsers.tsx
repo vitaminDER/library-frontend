@@ -2,18 +2,19 @@ import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { CircularProgress } from "@mui/material";
 import Pagination from "@mui/material/Pagination";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useMemo, useState } from "react";
 
 import { setPagination } from "@/App/store/reducers/reviewsReducer/reviewsSlice";
 import { getReviews } from "@/App/store/reducers/reviewsReducer/selectors";
 import { useAppDispatch, useAppSelector } from "@/App/store/storeHooks";
 import { FetchStatus } from "@/App/store/storeTypes";
-import { Review } from "@/widgets/ui/Review";
+import { Comment } from "@/widgets/ui/Comment";
 
 import {
   AccordionCollapsed,
   AccordionUnCollapsed,
   PaginationContainer,
+  ReviewsWrapper,
 } from "./styles";
 
 export const ReviewAllUsers = () => {
@@ -29,6 +30,11 @@ export const ReviewAllUsers = () => {
   ) => {
     dispatch(setPagination(value));
   };
+  const reviewsList = useMemo(() => {
+    return reviews?.content.map(review => {
+      return <Comment key={review.personId} review={review} />;
+    });
+  }, [reviews?.content]);
 
   return (
     <>
@@ -41,7 +47,7 @@ export const ReviewAllUsers = () => {
       </AccordionCollapsed>
       {isVisible && loadingReviews === FetchStatus.SUCCESS ? (
         <AccordionUnCollapsed>
-          <Review />
+          <ReviewsWrapper>{reviewsList}</ReviewsWrapper>
           <PaginationContainer>
             <Pagination
               count={reviews.totalPages}

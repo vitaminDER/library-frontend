@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import type { AxiosError } from "axios";
 
-import { QUERY } from "@/App/store/backend/constants";
+import { QUERY } from "@/App/store/backend/backendApi";
 import { getTokenFromCookie } from "@/App/store/reducers/authReducer/utils";
 import { ResponseUserReview } from "@/App/store/reducers/reviewsReducer/services/fetchUserReview";
 import { RequestError } from "@/App/store/storeTypes";

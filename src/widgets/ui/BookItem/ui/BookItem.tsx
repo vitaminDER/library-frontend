@@ -19,9 +19,9 @@ import {
 import { useAppDispatch, useAppSelector } from "@/App/store/storeHooks";
 import { FetchStatus } from "@/App/store/storeTypes";
 import { PATH } from "@/constants";
+import { ErrorComponent } from "@/shared/ErrorComponent";
+import { Rating } from "@/shared/Rating";
 import { BookImage } from "@/widgets/ui/BookImage";
-import { ErrorComponent } from "@/widgets/ui/ErrorComponent";
-import { Rating } from "@/widgets/ui/Rating";
 import { ReviewAllUsers } from "@/widgets/ui/ReviewAllUsers";
 import { UserReview } from "@/widgets/ui/UserReview";
 

@@ -43,3 +43,10 @@ export const LoaderContainer = styled.div`
   align-items: center;
   justify-content: center;
 `;
+export const ReviewsWrapper = styled.div`
+  min-height: 250px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
+`;

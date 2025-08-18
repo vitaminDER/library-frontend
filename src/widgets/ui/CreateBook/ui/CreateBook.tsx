@@ -9,16 +9,12 @@ import {
   RequestCreateNewBook,
 } from "@/App/store/reducers/adminReducer/services/createNewBook";
 import { useAppDispatch, useAppSelector } from "@/App/store/storeHooks";
+import { MultiSelect, MultiSelectOption } from "@/shared/MultiSelect";
 import {
   isImageUrl,
   VisuallyHiddenInput,
 } from "@/widgets/ui/CreateBook/ui/constants";
-import {
-  ButtonBox,
-  CreateBookWrapper,
-  FormWrapper,
-} from "@/widgets/ui/CreateBook/ui/styles";
-import { MultiSelect, MultiSelectOption } from "@/widgets/ui/MultiSelect";
+import { ButtonBox, FormWrapper } from "@/widgets/ui/CreateBook/ui/styles";
 import { FormStates } from "@/widgets/ui/RegistrationForm/ui/interface";
 
 export const CreateBook = () => {
@@ -138,7 +134,7 @@ export const CreateBook = () => {
   ]);
 
   return (
-    <CreateBookWrapper>
+    <>
       <FormWrapper>
         <TextField
           value={bookName.value}
@@ -235,6 +231,6 @@ export const CreateBook = () => {
           </Button>
         </ButtonBox>
       </FormWrapper>
-    </CreateBookWrapper>
+    </>
   );
 };

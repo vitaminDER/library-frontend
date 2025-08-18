@@ -6,7 +6,7 @@ import {
   ErrorContainer,
   ErrorWrapper,
   TextBox,
-} from "@/widgets/ui/ErrorComponent/ui/styles";
+} from "@/shared/ErrorComponent/ui/styles";
 
 type ImageType = "bug" | "errorNotFound";
 
