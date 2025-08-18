@@ -1,6 +1,6 @@
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import { Button, TextField } from "@mui/material";
-import React, { ChangeEvent, useMemo, useState } from "react";
+import React, { ChangeEvent, useCallback, useMemo, useState } from "react";
 
 import { GenreName } from "@/App/store/reducers/adminReducer/adminSchema";
 import { getGenreSelector } from "@/App/store/reducers/adminReducer/adminSelectors";
@@ -10,7 +10,10 @@ import {
 } from "@/App/store/reducers/adminReducer/services/createNewBook";
 import { useAppDispatch, useAppSelector } from "@/App/store/storeHooks";
 import { FormStates } from "@/pages/Registration/ui/interface";
-import { VisuallyHiddenInput } from "@/widgets/ui/CreateBook/ui/constants";
+import {
+  isImageUrl,
+  VisuallyHiddenInput,
+} from "@/widgets/ui/CreateBook/ui/constants";
 import {
   ButtonBox,
   CreateBookWrapper,
@@ -102,17 +105,38 @@ export const CreateBook = () => {
     });
   };
 
-  const createBookHandler = () => {
-    const requestNewBook: RequestCreateNewBook = {
-      title: bookName.value,
-      author: bookAuthor.value,
-      year: yearPublication.value,
-      genreId: selectedGenreId,
-      image: imageUrl.value,
-      description: bookDescription.value,
-    };
-    dispatch(createNewBook(requestNewBook));
-  };
+  const createBookHandler = useCallback(() => {
+    const isValidName = bookName.value.trim() === "";
+    const isValidUrl = imageUrl.value && isImageUrl(imageUrl.value);
+
+    if (isValidName) {
+      setBookName({ ...bookName, error: "Поле должно быть заполнено" });
+    }
+    if (imageUrl.value && !isImageUrl(imageUrl.value)) {
+      setImageUrl({ ...imageUrl, error: "Не валидный адрес" });
+    }
+
+    const isValidForm = !isValidName && isValidUrl;
+    if (isValidForm) {
+      const requestNewBook: RequestCreateNewBook = {
+        title: bookName.value,
+        author: bookAuthor.value,
+        year: yearPublication.value,
+        genreId: selectedGenreId,
+        image: imageUrl.value,
+        description: bookDescription.value,
+      };
+      dispatch(createNewBook(requestNewBook));
+    }
+  }, [
+    bookAuthor.value,
+    bookDescription.value,
+    bookName,
+    dispatch,
+    imageUrl,
+    selectedGenreId,
+    yearPublication.value,
+  ]);
 
   return (
     <CreateBookWrapper>

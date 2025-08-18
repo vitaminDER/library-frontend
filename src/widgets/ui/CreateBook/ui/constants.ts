@@ -24,3 +24,15 @@ export const MenuProps = {
 
 export const imageUrlRegex =
   /^(https?|ftp):\/\/(?:(?:[a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}|(?:\d{1,3}\.){3}\d{1,3})(?::\d+)?(?:\/[^?#]*)?\.(jpe?g|png|gif|bmp|svg|webp)(?:\?[^#]*)?(?:#.*)?$/i;
+
+export function validImageUrl(url: string): boolean {
+  const pattern =
+    /^(https?|ftp):\/\/(?:(?:[a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}|(?:\d{1,3}\.){3}\d{1,3})(?::\d+)?(?:\/[^?#]*)?\.(jpe?g|png|gif|bmp|svg|webp)(?:\?[^#]*)?(?:#.*)?$/i;
+  return pattern.test(url);
+}
+
+export const isImageUrl = (url: string) => {
+  const imageRegex =
+    /^(?:(?:https?|ftp):\/\/)?(?:[^\s\/$.?#]+\.(?:[^\s*"(),;:<>[$${}|\^`]+))?\/(?:.+\.(jpg|jpeg|png|gif|bmp|webp|svg))$/i;
+  return imageRegex.test(url);
+};
