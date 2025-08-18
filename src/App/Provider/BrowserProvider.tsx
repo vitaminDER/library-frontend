@@ -9,7 +9,7 @@ import { UserRole } from "@/App/store/reducers/authReducer/authSchema";
 import { PATH } from "@/constants";
 import { Admin } from "@/pages/Admin";
 import { Auth } from "@/pages/Auth";
-import { Books } from "@/pages/Books";
+import { HomeLibrary } from "@/pages/HomeLibrary";
 import { NotFound } from "@/pages/NotFound";
 import { Profile } from "@/pages/Profile";
 import { Registration } from "@/pages/Registration";
@@ -27,7 +27,7 @@ export const BrowserProvider = () => {
     >
       <Routes>
         <Route path={PATH.BASE} element={<AppContent />}>
-          <Route index path={PATH.BASE} element={<Books />} />
+          <Route index path={PATH.BASE} element={<HomeLibrary />} />
           <Route
             path={PATH.BOOKITEM}
             element={

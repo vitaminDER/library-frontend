@@ -11,8 +11,8 @@ import { fetchBooks } from "@/App/store/reducers/booksReducer/services";
 import { clearUserReview } from "@/App/store/reducers/reviewsReducer/reviewsSlice";
 import { useAppDispatch, useAppSelector } from "@/App/store/storeHooks";
 import { FetchStatus } from "@/App/store/storeTypes";
-import { BooksListContainer, BooksWrapper } from "@/pages/Books/ui/styles";
 import { BookImage } from "@/widgets/ui/BookImage";
+import { BooksListContainer, BooksWrapper } from "@/widgets/ui/Books/ui/styles";
 import { ErrorComponent } from "@/widgets/ui/ErrorComponent";
 
 export const Books = () => {

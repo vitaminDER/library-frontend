@@ -9,7 +9,6 @@ import {
   RequestCreateNewBook,
 } from "@/App/store/reducers/adminReducer/services/createNewBook";
 import { useAppDispatch, useAppSelector } from "@/App/store/storeHooks";
-import { FormStates } from "@/pages/Registration/ui/interface";
 import {
   isImageUrl,
   VisuallyHiddenInput,
@@ -19,8 +18,8 @@ import {
   CreateBookWrapper,
   FormWrapper,
 } from "@/widgets/ui/CreateBook/ui/styles";
-import { MultiSelect } from "@/widgets/ui/MultiSelect";
-import { MultiSelectOption } from "@/widgets/ui/MultiSelect/ui/interface";
+import { MultiSelect, MultiSelectOption } from "@/widgets/ui/MultiSelect";
+import { FormStates } from "@/widgets/ui/RegistrationForm/ui/interface";
 
 export const CreateBook = () => {
   const dispatch = useAppDispatch();

@@ -18,6 +18,7 @@ const initialState: AuthSchema = {
     login: "",
     role: "ROLE_ADMIN",
     token: "",
+    // isAuth: true,
     isAuth: false,
   },
   isRegistered: false,

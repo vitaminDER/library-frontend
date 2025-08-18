@@ -8,3 +8,5 @@ export const MenuProps = {
     },
   },
 };
+
+export const SELECT_ALL = "select-all";
