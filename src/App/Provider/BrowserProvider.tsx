@@ -11,7 +11,7 @@ import { Admin } from "@/pages/Admin";
 import { Auth } from "@/pages/Auth";
 import { Books } from "@/pages/Books";
 import { NotFound } from "@/pages/NotFound";
-import { Profile } from "@/pages/Profile/Profile";
+import { Profile } from "@/pages/Profile";
 import { Registration } from "@/pages/Registration";
 import { BookItem } from "@/widgets/ui/BookItem";
 

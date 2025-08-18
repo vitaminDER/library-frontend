@@ -5,22 +5,63 @@ import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import Box from "@mui/material/Box";
 import Tab from "@mui/material/Tab";
 import Tabs from "@mui/material/Tabs";
-import { useEffect, useState } from "react";
+import { JSX, SyntheticEvent, useEffect, useState } from "react";
 
 import { fetchGenres } from "@/App/store/reducers/adminReducer/services/fetchGenres";
 import { useAppDispatch } from "@/App/store/storeHooks";
 import { TabButtonContainer } from "@/widgets/ui/AdminPanel/ui/styles";
 import { TabPanel } from "@/widgets/ui/AdminPanel/ui/TabPanel";
 import { a11yProps } from "@/widgets/ui/AdminPanel/utils/utils";
-import { CreateBook } from "@/widgets/ui/CreateBook/ui/CreateBook";
+import { CreateBook } from "@/widgets/ui/CreateBook";
+
+interface AdminPanelTab {
+  tab: string;
+  tabPanel: JSX.Element;
+  icon: JSX.Element;
+}
+
+const adminPanelTabs: AdminPanelTab[] = [
+  { tab: "Все книги", tabPanel: <>Все книги</>, icon: <ImportContactsIcon /> },
+  { tab: "Добавить книгу", tabPanel: <CreateBook />, icon: <NoteAddIcon /> },
+  { tab: "Пользователи", tabPanel: <>Пользователи</>, icon: <PeopleIcon /> },
+  {
+    tab: "Настройки",
+    tabPanel: <>Настройки</>,
+    icon: <SettingsOutlinedIcon />,
+  },
+];
 
 export const AdminPanel = () => {
   const dispatch = useAppDispatch();
   const [value, setValue] = useState(0);
 
-  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
+  const handleChange = (event: SyntheticEvent, newValue: number) => {
     setValue(newValue);
   };
+
+  const tabButtons = adminPanelTabs.map(adminPanelTab => {
+    return (
+      <Tab
+        key={adminPanelTab.tab}
+        label={
+          <TabButtonContainer>
+            {adminPanelTab.icon}
+            <div>{adminPanelTab.tab}</div>
+          </TabButtonContainer>
+        }
+        {...a11yProps(2)}
+        style={{ alignItems: "flex-start", paddingLeft: "50px" }}
+      />
+    );
+  });
+
+  const tabPages = adminPanelTabs.map((adminPanelTab, index) => {
+    return (
+      <TabPanel key={index} value={value} index={index}>
+        {adminPanelTab.tabPanel}
+      </TabPanel>
+    );
+  });
 
   useEffect(() => {
     dispatch(fetchGenres());
@@ -47,59 +88,9 @@ export const AdminPanel = () => {
         }}
         onChange={handleChange}
       >
-        <Tab
-          label={
-            <TabButtonContainer>
-              <ImportContactsIcon />
-              <div>Все книги</div>
-            </TabButtonContainer>
-          }
-          {...a11yProps(0)}
-          style={{ alignItems: "flex-start", paddingLeft: "50px" }}
-        />
-        <Tab
-          label={
-            <TabButtonContainer>
-              <NoteAddIcon />
-              <div>Добавить книгу</div>
-            </TabButtonContainer>
-          }
-          {...a11yProps(1)}
-          style={{ alignItems: "flex-start", paddingLeft: "50px" }}
-        />
-        <Tab
-          label={
-            <TabButtonContainer>
-              <PeopleIcon />
-              <div>Пользователи</div>
-            </TabButtonContainer>
-          }
-          {...a11yProps(2)}
-          style={{ alignItems: "flex-start", paddingLeft: "50px" }}
-        />
-        <Tab
-          label={
-            <TabButtonContainer>
-              <SettingsOutlinedIcon />
-              <div>Настройки</div>
-            </TabButtonContainer>
-          }
-          {...a11yProps(3)}
-          style={{ alignItems: "flex-start", paddingLeft: "50px" }}
-        />
+        {tabButtons}
       </Tabs>
-      <TabPanel value={value} index={0}>
-        Все книги
-      </TabPanel>
-      <TabPanel value={value} index={1}>
-        <CreateBook />
-      </TabPanel>
-      <TabPanel value={value} index={2}>
-        <div>Пользователи</div>
-      </TabPanel>
-      <TabPanel value={value} index={3}>
-        <div>Настройки</div>
-      </TabPanel>
+      {tabPages}
     </Box>
   );
 };

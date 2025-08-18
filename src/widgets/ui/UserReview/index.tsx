@@ -1,3 +1,3 @@
-import { UserReview } from "@/widgets/ui/UserReview/ui/UserReview";
+import { UserReview } from "./ui/UserReview";
 
 export { UserReview };
