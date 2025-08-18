@@ -104,7 +104,7 @@ export const UserReview = () => {
             <Button
               variant="outlined"
               size={"large"}
-              disabled={comment.length < 10 || !userReview.comment}
+              disabled={comment.length < 10}
               onClick={handleCreateReview}
             >
               Отправить
