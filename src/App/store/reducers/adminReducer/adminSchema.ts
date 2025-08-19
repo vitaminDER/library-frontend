@@ -22,11 +22,27 @@ export const GenreName: Record<GenreKey, string> = {
   DYSTOPIA: "АНТИУТОПИЯ",
 };
 
+export interface BooksData {
+  id: string;
+  title: string;
+  author: string;
+  image: string;
+}
+
+export interface ResponseBooksData {
+  content: BooksData[];
+  pageNumber: number;
+  pageSize: number;
+  totalPages: number;
+}
+
 export interface AdminSchema {
-  data: null;
+  booksData: ResponseBooksData;
   genres: ResponseGenre[];
   loadingStatusGenre: FetchStatus;
   loadingCreateBook: FetchStatus;
+  loadingBooksData: FetchStatus;
   errorGenre: Nullable<string> | undefined;
   errorCreateBook: Nullable<string> | undefined;
+  errorBooksData: Nullable<string> | undefined;
 }

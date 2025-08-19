@@ -20,5 +20,6 @@ export const QUERY = {
   // Admin url
   createNewBookUrl: "api/admin/book",
   deleteItemBookUrl: "api/admin/book",
+  getAdminBooksUrl: "api/admin/book",
   getGenreUrl: "api/genre",
 };

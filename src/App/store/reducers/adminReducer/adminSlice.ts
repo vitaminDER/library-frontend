@@ -1,7 +1,11 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-import { AdminSchema } from "@/App/store/reducers/adminReducer/adminSchema";
+import {
+  AdminSchema,
+  ResponseBooksData,
+} from "@/App/store/reducers/adminReducer/adminSchema";
 import { createNewBook } from "@/App/store/reducers/adminReducer/services/createNewBook";
+import { fetchAdminBooks } from "@/App/store/reducers/adminReducer/services/fetchAdminBooks";
 import {
   fetchGenres,
   ResponseGenre,
@@ -9,12 +13,19 @@ import {
 import { FetchStatus } from "@/App/store/storeTypes";
 
 const initialState: AdminSchema = {
-  data: null,
+  booksData: {
+    content: [],
+    pageNumber: 1,
+    pageSize: 5,
+    totalPages: 1,
+  },
   genres: [],
   loadingStatusGenre: FetchStatus.IDLE,
   loadingCreateBook: FetchStatus.IDLE,
+  loadingBooksData: FetchStatus.IDLE,
   errorGenre: null,
   errorCreateBook: null,
+  errorBooksData: null,
 };
 
 export const adminSlice = createSlice({
@@ -22,6 +33,22 @@ export const adminSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: builder => {
+    builder
+      .addCase(fetchAdminBooks.pending, state => {
+        state.errorBooksData = null;
+        state.loadingBooksData = FetchStatus.PENDING;
+      })
+      .addCase(
+        fetchAdminBooks.fulfilled,
+        (state, action: PayloadAction<ResponseBooksData>) => {
+          state.booksData = action.payload;
+          state.loadingBooksData = FetchStatus.SUCCESS;
+        }
+      )
+      .addCase(fetchAdminBooks.rejected, (state, action) => {
+        state.errorBooksData = action.payload?.message;
+        state.loadingBooksData = FetchStatus.REJECTED;
+      });
     builder
       .addCase(fetchGenres.pending, state => {
         state.errorGenre = null;
