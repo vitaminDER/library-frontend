@@ -26,3 +26,7 @@ export const isValidImageUrl = (url: string): boolean => {
     return false;
   }
 };
+
+export const getSum = (oneNumber: number, twoNumber: number) => {
+  return oneNumber + twoNumber;
+};
