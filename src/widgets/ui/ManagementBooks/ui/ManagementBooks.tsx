@@ -31,7 +31,7 @@ interface OptionsRadioGroup {
 
 export type TypeSearch = "НАЗВАНИЮ" | "АВТОРУ" | "ISBN";
 
-export const SearchName: Record<string, string> = {
+const searchName: Record<string, string> = {
   ["НАЗВАНИЮ"]: "TITLE",
   ["АВТОРУ"]: "AUTHOR",
   ["ISBN"]: "ISBN",
@@ -77,10 +77,11 @@ export const ManagementBooks = () => {
   useEffect(() => {
     const request: RequestAdminBooks = {
       searchValue: searchValue.value,
-      typeSearch: SearchName[valueRadio],
+      typeSearch: searchName[valueRadio],
       pageNumber: pageNumber,
       pageSize: pageSize,
     };
+    console.log(request);
     dispatch(fetchAdminBooks(request));
   }, [dispatch, pageNumber, pageSize, searchValue.value, valueRadio]);
 
