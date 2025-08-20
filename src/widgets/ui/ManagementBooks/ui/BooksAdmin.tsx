@@ -76,7 +76,7 @@ export const BooksAdmin = () => {
     dispatch(fetchBooks());
   };
 
-  const bookListMook = mockBooks.map(book => {
+  const bookListMook = content.map(book => {
     return (
       <RowTableBookList key={book.id} isLast>
         <TableCell>
@@ -84,7 +84,7 @@ export const BooksAdmin = () => {
           {book.title}
         </TableCell>
         <TableCell>{book.author}</TableCell>
-        <TableCell>{book.ISBN}</TableCell>
+        <TableCell>ISBN</TableCell>
 
         <TableCell>
           <Tooltip arrow color={"#fff"} title="Редактировать" placement="top">
