@@ -84,7 +84,14 @@ export const ManagementBooks = () => {
 
   useEffect(() => {
     getBooksHandler();
-  }, [getBooksHandler]);
+  }, [
+    getBooksHandler,
+    dispatch,
+    pageNumber,
+    pageSize,
+    searchValue.value,
+    valueRadio,
+  ]);
 
   return (
     <ManagementBooksWrapper>
