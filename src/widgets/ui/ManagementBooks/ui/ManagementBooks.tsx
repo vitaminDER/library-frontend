@@ -29,8 +29,6 @@ interface OptionsRadioGroup {
   label: string;
 }
 
-export type TypeSearch = "НАЗВАНИЮ" | "АВТОРУ" | "ISBN";
-
 const searchName: Record<string, string> = {
   ["НАЗВАНИЮ"]: "TITLE",
   ["АВТОРУ"]: "AUTHOR",
