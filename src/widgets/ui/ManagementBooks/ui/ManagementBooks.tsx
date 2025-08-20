@@ -75,11 +75,11 @@ export const ManagementBooks = () => {
   useEffect(() => {
     const request: RequestAdminBooks = {
       searchValue: searchValue.value,
-      typeSearch: searchName[valueRadio],
+      typeSearch: searchName[valueRadio.toUpperCase()],
       pageNumber: pageNumber,
       pageSize: pageSize,
     };
-    console.log(request);
+    console.log(request, valueRadio);
     dispatch(fetchAdminBooks(request));
   }, [dispatch, pageNumber, pageSize, searchValue.value, valueRadio]);
 
