@@ -3,6 +3,7 @@ import type { AxiosError } from "axios";
 
 import { QUERY } from "@/App/store/backend/backendApi";
 import { ResponseBooksData } from "@/App/store/reducers/adminReducer/adminSchema";
+import { getTokenFromCookie } from "@/App/store/reducers/authReducer/utils";
 import { RequestError } from "@/App/store/storeTypes";
 import { api } from "@/utils/api/api";
 
@@ -25,6 +26,10 @@ export const fetchAdminBooks = createAsyncThunk<
   try {
     const response = await api.get<ResponseBooksData>(QUERY.getAdminBooksUrl, {
       params,
+      headers: {
+        Authorization: `Bearer ${getTokenFromCookie()}`,
+        Accept: "application/json",
+      },
     });
     return response.data;
   } catch (e) {
