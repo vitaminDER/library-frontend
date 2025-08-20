@@ -84,7 +84,7 @@ export const AdminPanel = () => {
         width: "100%",
         flexGrow: 1,
         display: "flex",
-        height: "70vh",
+        height: "calc(100vh - 86px)",
         boxSizing: "border-box",
       }}
     >

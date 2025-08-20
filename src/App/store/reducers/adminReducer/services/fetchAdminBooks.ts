@@ -10,7 +10,7 @@ export type SearchType = "TITLE" | "AUTHOR" | "ISBN";
 
 export interface RequestAdminBooks {
   searchValue: string;
-  typeSearch: SearchType;
+  typeSearch: string;
   pageNumber: number;
   pageSize: number;
 }

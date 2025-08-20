@@ -31,7 +31,11 @@ const initialState: AdminSchema = {
 export const adminSlice = createSlice({
   name: "adminSlice",
   initialState,
-  reducers: {},
+  reducers: {
+    setBooksPagination(state, action) {
+      state.booksData.pageNumber = action.payload;
+    },
+  },
   extraReducers: builder => {
     builder
       .addCase(fetchAdminBooks.pending, state => {
@@ -81,4 +85,5 @@ export const adminSlice = createSlice({
   },
 });
 
+export const { setBooksPagination } = adminSlice.actions;
 export const adminSliceReducer = adminSlice.reducer;
