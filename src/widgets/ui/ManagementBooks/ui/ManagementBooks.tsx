@@ -8,7 +8,7 @@ import {
   RadioGroup,
   TextField,
 } from "@mui/material";
-import React, { ChangeEvent, useEffect, useState } from "react";
+import React, { ChangeEvent, useCallback, useEffect, useState } from "react";
 
 import { getBookDataSelector } from "@/App/store/reducers/adminReducer/adminSelectors";
 import {
@@ -72,16 +72,19 @@ export const ManagementBooks = () => {
     );
   });
 
-  useEffect(() => {
+  const getBooksHandler = useCallback(() => {
     const request: RequestAdminBooks = {
       searchValue: searchValue.value,
       typeSearch: searchName[valueRadio.toUpperCase()],
       pageNumber: pageNumber,
       pageSize: pageSize,
     };
-    console.log(request, valueRadio);
     dispatch(fetchAdminBooks(request));
   }, [dispatch, pageNumber, pageSize, searchValue.value, valueRadio]);
+
+  useEffect(() => {
+    getBooksHandler();
+  }, [getBooksHandler]);
 
   return (
     <ManagementBooksWrapper>
@@ -119,7 +122,7 @@ export const ManagementBooks = () => {
           </RadioGroup>
         </FormControl>
       </FilterPanelContainer>
-      <BooksAdmin />
+      <BooksAdmin getBooksHandler={getBooksHandler} />
     </ManagementBooksWrapper>
   );
 };

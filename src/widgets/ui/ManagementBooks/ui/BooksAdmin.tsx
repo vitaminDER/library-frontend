@@ -57,7 +57,12 @@ const mockBooks = [
   },
 ];
 
-export const BooksAdmin = () => {
+interface BooksAdminProps {
+  getBooksHandler: () => void;
+}
+
+export const BooksAdmin = (props: BooksAdminProps) => {
+  const { getBooksHandler } = props;
   const dispatch = useAppDispatch();
   const { content, pageNumber, totalPages } =
     useAppSelector(getBookDataSelector);
@@ -74,6 +79,7 @@ export const BooksAdmin = () => {
   const deleteHandler = (id: string) => {
     dispatch(deleteItemBook(id));
     dispatch(fetchBooks());
+    getBooksHandler();
   };
 
   const bookListMook = content.map(book => {
